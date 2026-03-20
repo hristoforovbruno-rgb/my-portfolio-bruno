@@ -1,0 +1,224 @@
+.frame {
+  overflow: hidden;
+  border-radius: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 10, 0.94);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.viewport {
+  padding: 1.3rem;
+}
+
+.compact .viewport {
+  min-height: 250px;
+}
+
+.full .viewport {
+  min-height: 420px;
+  padding: 2rem;
+}
+
+.hero {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 1.4rem;
+}
+
+.full .hero {
+  padding: 1.8rem;
+}
+
+.kicker {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 248, 229, 0.72);
+}
+
+.title {
+  max-width: 9ch;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 0.95;
+  color: #fff;
+}
+
+.copy {
+  max-width: 32rem;
+  margin: 0;
+  line-height: 1.75;
+  color: rgba(255, 248, 229, 0.74);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.primary,
+.ghost {
+  border-radius: 999px;
+  padding: 0.72rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.primary {
+  background: rgba(255, 248, 229, 0.96);
+  color: #090909;
+}
+
+.ghost {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.card {
+  padding: 0.95rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 248, 229, 0.82);
+  line-height: 1.5;
+}
+
+.restaurantHero {
+  background:
+    radial-gradient(circle at top left, rgba(223, 175, 86, 0.24), transparent 34%),
+    linear-gradient(145deg, #2d1c10 0%, #120d0a 58%, #090909 100%);
+}
+
+.restaurantTop {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: end;
+}
+
+.restaurantPhoto {
+  min-height: 170px;
+  border-radius: 1.2rem;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 214, 148, 0.4), transparent 20%),
+    linear-gradient(145deg, #7b4928, #2a150d 60%, #140d09);
+}
+
+.menuStrip {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.clinicHero {
+  background:
+    radial-gradient(circle at top right, rgba(159, 201, 220, 0.22), transparent 34%),
+    linear-gradient(145deg, #14232c 0%, #0b1218 58%, #090909 100%);
+}
+
+.clinicGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 0.9fr;
+}
+
+.clinicPanels {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gymHero {
+  background:
+    radial-gradient(circle at top left, rgba(238, 98, 67, 0.22), transparent 34%),
+    linear-gradient(145deg, #271110 0%, #110b0b 58%, #090909 100%);
+}
+
+.gymBanner {
+  width: fit-content;
+  padding: 0.55rem 0.8rem;
+  border-radius: 999px;
+  background: #ff7448;
+  color: #1c0904;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.gymStats {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.serviceHero {
+  background:
+    radial-gradient(circle at top right, rgba(101, 187, 165, 0.2), transparent 34%),
+    linear-gradient(145deg, #15302a 0%, #0c1412 58%, #090909 100%);
+}
+
+.serviceHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+}
+
+.servicePhone {
+  min-width: 76px;
+  padding: 0.75rem 0.9rem;
+  border-radius: 1rem;
+  text-align: center;
+  font-weight: 800;
+  color: #08100d;
+  background: #74d1b6;
+}
+
+.serviceLayout {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: start;
+}
+
+.serviceActions {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.serviceList {
+  display: grid;
+  gap: 0.8rem;
+}
+
+@media (max-width: 720px) {
+  .restaurantTop,
+  .clinicGrid,
+  .serviceLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .menuStrip,
+  .clinicPanels,
+  .gymStats {
+    grid-template-columns: 1fr;
+  }
+}
