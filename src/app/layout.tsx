@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { DevExtensionErrorFilter } from "@/components/dev-extension-error-filter";
 import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
@@ -40,6 +41,7 @@ export default function RootLayout({
           </main>
           <SiteFooter />
         </div>
+        <Analytics />
       </body>
     </html>
   );
