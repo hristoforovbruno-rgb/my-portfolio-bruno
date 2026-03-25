@@ -13,12 +13,15 @@ export async function connectDatabase() {
   }
 
   if (!connectionPromise) {
-    connectionPromise = mongoose.connect(env.MONGODB_URI);
+    connectionPromise = mongoose.connect(env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+    });
   }
 
   try {
     return await connectionPromise;
   } catch (error) {
+    console.error("MongoDB connection failed", error);
     connectionPromise = null;
     throw error;
   }

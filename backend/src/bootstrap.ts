@@ -13,6 +13,7 @@ export function bootstrapApp() {
       await initializeCmsStore();
       await ensureAdminUser();
     })().catch((error) => {
+      console.error("Bootstrap failed", error);
       bootstrapPromise = null;
       throw error;
     });

@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import mongoose from "mongoose";
 import morgan from "morgan";
 import { createRequire } from "node:module";
 import { env } from "./config/env.js";
@@ -25,6 +26,19 @@ app.use(
 );
 app.use(express.json());
 app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
+
+app.get("/health", (_request, response) => {
+  response.json({
+    ok: true,
+    database:
+      mongoose.connection.readyState === 1
+        ? "connected"
+        : mongoose.connection.readyState === 2
+          ? "connecting"
+          : "disconnected",
+  });
+});
+
 app.use(async (_request, _response, next) => {
   try {
     await bootstrapApp();
@@ -32,10 +46,6 @@ app.use(async (_request, _response, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-app.get("/health", (_request, response) => {
-  response.json({ ok: true });
 });
 
 app.use("/api/auth", authRoutes);
