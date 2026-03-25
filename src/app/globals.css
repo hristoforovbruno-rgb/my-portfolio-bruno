@@ -5,9 +5,85 @@
   --color-panel: #101010;
   --color-panel-2: #151515;
   --color-text: #f5f1e6;
+  --color-text-muted: rgba(245, 241, 230, 0.74);
+  --color-text-soft: rgba(245, 241, 230, 0.6);
+  --color-text-faint: rgba(245, 241, 230, 0.48);
   --color-gold: #d4af37;
   --color-gold-light: #f0d985;
   --color-gold-soft: rgba(212, 175, 55, 0.35);
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-soft: rgba(255, 255, 255, 0.08);
+  --color-control-bg: #171717;
+  --color-input-bg: #0c0c0c;
+  --color-surface-soft: #171717;
+  --color-surface-strong: #111111;
+  --surface-gradient: linear-gradient(180deg, #171717, #0d0d0d);
+  --highlight-gradient: linear-gradient(135deg, #3a2c0f, #171717 44%, #0d0d0d 100%);
+  --hero-panel-gradient: linear-gradient(180deg, #1b160d, #101010 20%, #060606 100%);
+  --accent-surface: rgba(212, 175, 55, 0.1);
+  --accent-surface-strong: rgba(212, 175, 55, 0.16);
+  --icon-panel-bg: radial-gradient(circle, rgba(212, 175, 55, 0.26), rgba(12, 12, 12, 0.96) 70%);
+  --mock-frame-bg: rgba(10, 10, 10, 0.94);
+  --mock-frame-border: rgba(255, 255, 255, 0.08);
+  --mock-frame-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --mock-dot: rgba(255, 255, 255, 0.22);
+  --mock-text-strong: #ffffff;
+  --mock-text: rgba(255, 248, 229, 0.74);
+  --mock-card-bg: rgba(255, 255, 255, 0.06);
+  --mock-card-text: rgba(255, 248, 229, 0.82);
+  --mock-button-bg: rgba(255, 248, 229, 0.96);
+  --mock-button-text: #090909;
+  --mock-ghost-border: rgba(255, 255, 255, 0.18);
+  --mock-ghost-text: #ffffff;
+  --color-card-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+  --color-backdrop: rgba(6, 6, 6, 0.72);
+  --page-bg:
+    radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 28%),
+    radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.08), transparent 22%),
+    linear-gradient(180deg, #090909 0%, #050505 100%);
+}
+
+:root[data-theme="light"] {
+  --color-bg: #f6eddc;
+  --color-panel: #fff9ef;
+  --color-panel-2: #fffcf6;
+  --color-text: #24170a;
+  --color-text-muted: rgba(52, 32, 11, 0.76);
+  --color-text-soft: rgba(52, 32, 11, 0.6);
+  --color-text-faint: rgba(52, 32, 11, 0.48);
+  --color-gold: #a36d14;
+  --color-gold-light: #b98120;
+  --color-gold-soft: rgba(163, 109, 20, 0.22);
+  --color-border: rgba(92, 62, 18, 0.14);
+  --color-border-soft: rgba(92, 62, 18, 0.1);
+  --color-control-bg: #fff7ee;
+  --color-input-bg: #ffffff;
+  --color-surface-soft: #fff8f0;
+  --color-surface-strong: #f1e4d1;
+  --surface-gradient: linear-gradient(180deg, #fffbf5, #f2e6d4);
+  --highlight-gradient: linear-gradient(135deg, #f3e0b8, #fffaf2 48%, #f2e6d4 100%);
+  --hero-panel-gradient: linear-gradient(180deg, #f8efe0, #fffbf5 24%, #f0e4d2 100%);
+  --accent-surface: rgba(163, 109, 20, 0.08);
+  --accent-surface-strong: rgba(163, 109, 20, 0.14);
+  --icon-panel-bg: radial-gradient(circle, rgba(190, 136, 33, 0.22), rgba(255, 249, 239, 0.96) 72%);
+  --mock-frame-bg: rgba(255, 251, 245, 0.94);
+  --mock-frame-border: rgba(92, 62, 18, 0.12);
+  --mock-frame-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  --mock-dot: rgba(92, 62, 18, 0.24);
+  --mock-text-strong: #24170a;
+  --mock-text: rgba(52, 32, 11, 0.72);
+  --mock-card-bg: rgba(255, 252, 246, 0.84);
+  --mock-card-text: rgba(52, 32, 11, 0.82);
+  --mock-button-bg: rgba(163, 109, 20, 0.14);
+  --mock-button-text: #24170a;
+  --mock-ghost-border: rgba(92, 62, 18, 0.14);
+  --mock-ghost-text: #24170a;
+  --color-card-shadow: 0 24px 70px rgba(92, 62, 18, 0.12);
+  --color-backdrop: rgba(56, 38, 10, 0.16);
+  --page-bg:
+    radial-gradient(circle at top, rgba(171, 122, 30, 0.14), transparent 32%),
+    radial-gradient(circle at 82% 18%, rgba(201, 150, 45, 0.12), transparent 24%),
+    linear-gradient(180deg, #fbf6ec 0%, #f2e8d7 100%);
 }
 
 @theme inline {
@@ -20,13 +96,20 @@
   box-sizing: border-box;
 }
 
+body,
+body * {
+  transition:
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    opacity 220ms ease;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
-  background:
-    radial-gradient(circle at top, rgba(212, 175, 55, 0.1), transparent 28%),
-    radial-gradient(circle at 80% 15%, rgba(212, 175, 55, 0.08), transparent 22%),
-    linear-gradient(180deg, #090909 0%, #050505 100%);
+  background: var(--color-bg);
 }
 
 body {
@@ -34,6 +117,8 @@ body {
   min-width: 320px;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--color-text);
+  background: var(--page-bg);
+  background-attachment: fixed;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -58,6 +143,115 @@ h4 {
   will-change: auto;
 }
 
+.theme-surface {
+  border: 1px solid var(--color-border);
+  background: var(--surface-gradient);
+  box-shadow: var(--color-card-shadow);
+}
+
+.theme-surface-soft {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-soft);
+}
+
+.theme-surface-strong {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-strong);
+}
+
+.theme-highlight-surface {
+  border: 1px solid var(--color-gold-soft);
+  background: var(--highlight-gradient);
+  box-shadow: var(--color-card-shadow);
+}
+
+.theme-hero-panel {
+  border: 1px solid var(--color-gold-soft);
+  background: var(--hero-panel-gradient);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+}
+
+.theme-chip {
+  border: 1px solid var(--color-gold-soft);
+  background: var(--accent-surface);
+  color: var(--color-gold-light);
+}
+
+.theme-ghost {
+  border: 1px solid var(--color-border);
+  background: var(--color-control-bg);
+  color: var(--color-text-muted);
+}
+
+.theme-field {
+  border: 1px solid var(--color-border);
+  background: var(--color-input-bg);
+  color: var(--color-text);
+}
+
+.theme-text-main {
+  color: var(--color-text);
+}
+
+.theme-text-muted {
+  color: var(--color-text-muted);
+}
+
+.theme-text-soft {
+  color: var(--color-text-soft);
+}
+
+.theme-text-faint {
+  color: var(--color-text-faint);
+}
+
+.interactive-card {
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms ease,
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms ease,
+    filter 240ms ease;
+  will-change: transform, box-shadow;
+}
+
+.interactive-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  border-color: var(--color-gold-soft);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.2),
+    0 12px 36px rgba(212, 175, 55, 0.14);
+  filter: saturate(1.03);
+}
+
+.interactive-button {
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 220ms ease,
+    color 220ms ease,
+    background-color 220ms ease,
+    filter 220ms ease;
+  will-change: transform, box-shadow;
+}
+
+.interactive-button:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.18),
+    0 10px 26px rgba(212, 175, 55, 0.18);
+  filter: saturate(1.04);
+}
+
+@media (hover: none) {
+  .interactive-card:hover,
+  .interactive-button:hover {
+    transform: none;
+    box-shadow: none;
+    filter: none;
+  }
+}
+
 .gold-ring {
   box-shadow:
     0 0 0 1px rgba(212, 175, 55, 0.04),
@@ -65,13 +259,18 @@ h4 {
 }
 
 .field-shell::placeholder {
-  color: rgba(245, 241, 230, 0.38);
+  color: color-mix(in srgb, var(--color-text) 38%, transparent);
 }
 
 .project-gradient {
   position: absolute;
   inset: 0;
   transition: transform 240ms ease;
+}
+
+.mobile-nav-backdrop {
+  background: var(--color-backdrop);
+  backdrop-filter: blur(10px);
 }
 
 article:hover .project-gradient {
@@ -103,11 +302,80 @@ article:hover .project-gradient {
 }
 
 .page-transition {
-  animation: pageEnter 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: pageEnter 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+  transform-origin: top center;
+}
+
+.cookie-banner {
+  transform-origin: bottom center;
+  will-change: opacity, transform, filter;
+}
+
+.cookie-banner-open {
+  animation: cookieBannerIn 460ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cookie-banner-closing {
+  animation: cookieBannerOut 260ms ease forwards;
+}
+
+.cookie-banner-copy,
+.cookie-banner-actions {
   will-change: opacity, transform;
 }
 
+.cookie-banner-copy-open {
+  animation: cookieBannerContentIn 420ms cubic-bezier(0.22, 1, 0.36, 1) 90ms both;
+}
+
+.cookie-banner-actions-open {
+  animation: cookieBannerContentIn 420ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+
+.cookie-banner-copy-closing,
+.cookie-banner-actions-closing {
+  animation: cookieBannerContentOut 200ms ease forwards;
+}
+
 @keyframes pageEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes cookieBannerIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.97);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes cookieBannerOut {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0) scale(0.985);
+    filter: blur(6px);
+  }
+}
+
+@keyframes cookieBannerContentIn {
   0% {
     opacity: 0;
     transform: translate3d(0, 14px, 0);
@@ -115,6 +383,17 @@ article:hover .project-gradient {
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes cookieBannerContentOut {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
   }
 }
 

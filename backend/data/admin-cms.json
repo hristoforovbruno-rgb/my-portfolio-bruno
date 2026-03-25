@@ -1,0 +1,322 @@
+{
+  "content": {
+    "en": {
+      "homeHeroEyebrow": "Web Developer Tallinn",
+      "homeHeroTitle": "Fast business websites that look serious and convert.",
+      "homeHeroDescription": "I build websites for local businesses that need sharper trust, clearer messaging, and a stronger path to enquiries.",
+      "homePrimaryCta": "Get a Free Audit",
+      "homeSecondaryCta": "See Examples",
+      "ctaEyebrow": "Urgency",
+      "ctaTitle": "Every week you delay, more buyers leave your website and pay someone else.",
+      "ctaDescription": "Get a free website audit and see where your current site looks weak, slow, or unclear.",
+      "ctaButton": "Get a Free Website Audit",
+      "footerTitle": "Fast, persuasive websites for businesses that cannot afford to look slow or outdated.",
+      "footerText": "Built for local companies that need a better first impression, clearer trust, and more enquiries.",
+      "contactPhone": "+372 5863 0442",
+      "contactLocation": "Tallinn, Estonia"
+    },
+    "et": {
+      "homeHeroEyebrow": "Veebiarendaja Tallinn",
+      "homeHeroTitle": "Kiired ariveebid, mis mojuvad tosiselt ja toovad rohkem paringuid.",
+      "homeHeroDescription": "Ehitan veebilehti kohalikele ettevotetele, kes vajavad rohkem usaldust, selgemat sonumit ja tugevamat teed paringuteni.",
+      "homePrimaryCta": "Kusi tasuta auditit",
+      "homeSecondaryCta": "Vaata naiteid",
+      "ctaEyebrow": "Kiireloomulisus",
+      "ctaTitle": "Iga nadal, mil viivitad, lahkub sinu veebilt rohkem ostjaid ja maksab kellelegi teisele.",
+      "ctaDescription": "Kusi tasuta veebiauditit ja vaata, kus sinu praegune leht mojub norgalt, aeglaselt voi ebaselgelt.",
+      "ctaButton": "Kusi tasuta veebiauditit",
+      "footerTitle": "Kiired ja veenvad veebilehed ettevotetele, kes ei saa endale lubada aeglast voi aegunud kuvandit.",
+      "footerText": "Loodud kohalikele ettevotetele, kes vajavad paremat esmamuljet, rohkem usaldust ja rohkem paringuid.",
+      "contactPhone": "+372 5863 0442",
+      "contactLocation": "Tallinn, Eesti"
+    }
+  },
+  "formSettings": {
+    "enabled": true,
+    "successMessage": {
+      "en": "Thanks. Your message was sent and I will reply as soon as possible.",
+      "et": "Aitah. Sinu sonum on saadetud ja vastan esimesel voimalusel."
+    },
+    "destinationEmail": "hristoforovbruno@gmail.com",
+    "autoReplyEnabled": true,
+    "captchaReady": false
+  },
+  "posts": [
+    {
+      "id": "5bdce373-b841-452c-b2ea-df0edc6302c4",
+      "slug": "how-much-does-a-small-business-website-cost-in-estonia",
+      "category": "Pricing",
+      "title": "How much does a small business website cost in Estonia?",
+      "excerpt": "The real answer depends on scope, copy, SEO depth, and whether the site is built to sell or just exist.",
+      "description": "A practical breakdown of what drives small business website pricing in Estonia.",
+      "publishedAt": "March 22, 2026",
+      "readingTime": "4 min read",
+      "status": "published",
+      "sections": [
+        {
+          "heading": "Most websites are priced by complexity.",
+          "body": [
+            "A simple local business site costs far less than a site with multiple service pages, stronger messaging work, and deeper SEO structure."
+          ]
+        }
+      ],
+      "coverImage": "",
+      "createdAt": "2026-03-22T14:45:21.104Z",
+      "updatedAt": "2026-03-22T14:45:21.104Z"
+    },
+    {
+      "id": "3b394d0b-cc95-4382-961b-452dcaf9c370",
+      "slug": "why-local-business-websites-lose-leads",
+      "category": "Conversion",
+      "title": "Why local business websites lose leads even when traffic is fine",
+      "excerpt": "Traffic alone does not help when trust signals, structure, and calls to action are weak.",
+      "description": "The most common reasons local business websites lose enquiries despite getting visitors.",
+      "publishedAt": "March 22, 2026",
+      "readingTime": "3 min read",
+      "status": "published",
+      "sections": [
+        {
+          "heading": "The problem is often trust, not traffic.",
+          "body": [
+            "Visitors still leave when the business looks outdated, unclear, or hard to contact."
+          ]
+        }
+      ],
+      "coverImage": "",
+      "createdAt": "2026-03-22T14:45:21.104Z",
+      "updatedAt": "2026-03-22T14:45:21.104Z"
+    }
+  ],
+  "servicePages": [
+    {
+      "id": "a2162fc5-ecdf-41b9-811c-7e13d632ef19",
+      "slug": "website-development",
+      "title": "Website Development",
+      "keyword": "fast business websites Estonia",
+      "eyebrow": "Service Detail",
+      "summary": "Fast business websites built to look credible, load quickly, and make action obvious.",
+      "intro": "This is for businesses that need a serious online presence instead of another generic brochure site.",
+      "pain": "Your current website loads slowly, looks outdated, and leaks potential customers every day.",
+      "solution": "I build modern websites that load fast, feel premium, and make it easier for people to trust you and take action.",
+      "outcomes": [
+        "Faster first impression",
+        "Stronger trust",
+        "More calls and enquiries"
+      ],
+      "bestFor": [
+        "Local businesses launching a new website",
+        "Businesses with slow or outdated websites"
+      ],
+      "deliverables": [
+        "Clear page structure",
+        "Mobile-first frontend",
+        "Baseline SEO setup"
+      ],
+      "process": [
+        "Audit the site needs",
+        "Map the structure",
+        "Build the frontend",
+        "Launch and QA"
+      ],
+      "priceNote": "Typical fit: Starter Website or Advanced Website depending on scope.",
+      "createdAt": "2026-03-22T14:45:21.106Z",
+      "updatedAt": "2026-03-22T14:45:21.106Z"
+    },
+    {
+      "id": "b7fff3d1-fbe6-45e3-926b-7d96402bfd15",
+      "slug": "seo-optimization",
+      "title": "SEO Optimization",
+      "keyword": "SEO websites Tallinn",
+      "eyebrow": "Service Detail",
+      "summary": "Sharper structure and local intent targeting that help the right buyers find you.",
+      "intro": "This is for businesses that already have a website but are not getting found enough by local buyers.",
+      "pain": "A beautiful website means nothing if your ideal customers never see it.",
+      "solution": "I improve page messaging, structure, and search visibility so your business gets found by people ready to buy.",
+      "outcomes": [
+        "More local visibility",
+        "Better quality traffic",
+        "Higher-value leads"
+      ],
+      "bestFor": [
+        "Businesses with weak local visibility",
+        "Sites with weak targeting"
+      ],
+      "deliverables": [
+        "On-page SEO cleanup",
+        "Metadata improvements",
+        "Internal linking recommendations"
+      ],
+      "process": [
+        "Review current targeting",
+        "Match offers to search intent",
+        "Refine content and structure"
+      ],
+      "priceNote": "Typical fit: Advanced Website or Monthly Maintenance.",
+      "createdAt": "2026-03-22T14:45:21.106Z",
+      "updatedAt": "2026-03-22T14:45:21.106Z"
+    }
+  ],
+  "mediaItems": [],
+  "seoPages": [
+    {
+      "id": "52186442-aa8c-43c6-b3ca-2b67048d02a6",
+      "path": "/",
+      "title": "Web Developer Tallinn Estonia | Fast Business Websites for Local Companies",
+      "description": "Fast, persuasive websites for businesses in Tallinn and across Estonia.",
+      "keywords": [
+        "web developer Tallinn",
+        "website developer Estonia",
+        "small business website Estonia"
+      ],
+      "ogImage": "",
+      "canonicalPath": "/",
+      "updatedAt": "2026-03-22T14:45:21.106Z"
+    },
+    {
+      "id": "bda66f28-6f2e-4043-8b9e-e4e9e48f864e",
+      "path": "/services",
+      "title": "Web Development Services Tallinn Estonia | SEO, Redesigns, Maintenance",
+      "description": "Website development, SEO optimization, redesigns, and maintenance plans for businesses in Estonia.",
+      "keywords": [
+        "SEO websites Tallinn",
+        "website redesign Tallinn",
+        "website maintenance Estonia"
+      ],
+      "ogImage": "",
+      "canonicalPath": "/services",
+      "updatedAt": "2026-03-22T14:45:21.106Z"
+    },
+    {
+      "id": "67bcb1ac-32de-4017-b167-8e58d0c29fa1",
+      "path": "/pricing",
+      "title": "Website Pricing Estonia | Clear Packages for Local Businesses",
+      "description": "Website pricing for local businesses that need stronger trust and better enquiries.",
+      "keywords": [
+        "website pricing Estonia",
+        "small business website cost Tallinn"
+      ],
+      "ogImage": "",
+      "canonicalPath": "/pricing",
+      "updatedAt": "2026-03-22T14:45:21.106Z"
+    },
+    {
+      "id": "6416061f-c3ac-49b5-92d2-b3ff24557d91",
+      "path": "/insights",
+      "title": "Website Insights Estonia | Pricing, SEO, and Conversion Advice",
+      "description": "Short website insights for Estonia small businesses on pricing, SEO, conversion, and lead generation.",
+      "keywords": [
+        "website tips Estonia",
+        "local SEO insights Estonia"
+      ],
+      "ogImage": "",
+      "canonicalPath": "/insights",
+      "updatedAt": "2026-03-22T14:45:21.106Z"
+    }
+  ],
+  "activityLogs": [
+    {
+      "id": "4a2bb11a-65c7-4dcb-81c4-761982d71264",
+      "action": "bulk-delete",
+      "entityType": "message",
+      "entityId": "",
+      "description": "Deleted 4 messages.",
+      "createdAt": "2026-03-25T19:44:22.382Z"
+    },
+    {
+      "id": "5f51de41-6a81-4b13-8271-9440834e694e",
+      "action": "bulk-update",
+      "entityType": "message",
+      "entityId": "",
+      "description": "Updated 4 messages to read.",
+      "createdAt": "2026-03-25T19:44:11.389Z"
+    },
+    {
+      "id": "6cbc8f9a-2976-4a3f-bc9b-3fcb2900c03c",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:28:58.753Z"
+    },
+    {
+      "id": "af1f0a7e-7759-448f-bb58-024b812bf198",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:16:51.488Z"
+    },
+    {
+      "id": "4b9b9f15-1035-4e50-bcc2-fb3b2fe5b321",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:16:51.312Z"
+    },
+    {
+      "id": "2346da20-a72a-40b6-8ad6-0a6fb756804a",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:16:51.128Z"
+    },
+    {
+      "id": "30a265fd-7069-42a6-8c31-fc7900517579",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:16:50.510Z"
+    },
+    {
+      "id": "8c086217-48d3-4701-a6f4-d115a1373afd",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:16:42.977Z"
+    },
+    {
+      "id": "b959be47-9a25-4456-abbe-d6a116890cf7",
+      "action": "update",
+      "entityType": "content",
+      "entityId": "",
+      "description": "Updated shared site content.",
+      "createdAt": "2026-03-22T15:12:18.493Z"
+    },
+    {
+      "id": "c1f72331-17c0-4dff-8718-3428cccbd9d6",
+      "action": "update",
+      "entityType": "content",
+      "entityId": "",
+      "description": "Updated shared site content.",
+      "createdAt": "2026-03-22T15:12:11.520Z"
+    },
+    {
+      "id": "94863b77-5f23-4c22-9b12-f523fb71acf3",
+      "action": "update",
+      "entityType": "content",
+      "entityId": "",
+      "description": "Updated shared site content.",
+      "createdAt": "2026-03-22T15:11:58.278Z"
+    },
+    {
+      "id": "f0149b66-c8f2-427f-a7ee-3f9b8484c37f",
+      "action": "update",
+      "entityType": "content",
+      "entityId": "",
+      "description": "Updated shared site content.",
+      "createdAt": "2026-03-22T15:11:41.689Z"
+    },
+    {
+      "id": "3d12f4ad-e8aa-4d02-b014-c628a1b9133b",
+      "action": "update",
+      "entityType": "form",
+      "entityId": "",
+      "description": "Updated form settings.",
+      "createdAt": "2026-03-22T15:01:03.057Z"
+    }
+  ]
+}

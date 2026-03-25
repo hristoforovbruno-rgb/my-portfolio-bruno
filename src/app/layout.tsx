@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { DevExtensionErrorFilter } from "@/components/dev-extension-error-filter";
-import { PageTransition } from "@/components/page-transition";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { AppShell } from "@/components/app-shell";
+import { LanguageProvider } from "@/lib/language";
 import { siteUrl } from "@/lib/site-content";
+import { ThemeProvider } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Bruno Hristoforov | Web Developer in Tallinn",
+    default: "Bruno Hristoforov | Web Developer in Tallinn, Estonia",
     template: "%s | Bruno Hristoforov",
   },
   description:
-    "Bruno Hristoforov builds fast, premium websites for small businesses and local service companies that need more trust, more visibility, and more enquiries.",
+    "Bruno Hristoforov builds fast, premium websites for small businesses in Tallinn and across Estonia that need more trust, more visibility, and more enquiries.",
   applicationName: "Bruno Hristoforov Website Examples",
   category: "business",
   icons: {
@@ -30,16 +29,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full scroll-smooth antialiased">
-      <body className="min-h-full bg-[var(--color-bg)] text-[var(--color-text)]">
-        <DevExtensionErrorFilter />
-        <div className="relative flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <SiteFooter />
-        </div>
+    <html lang="en" className="h-full scroll-smooth antialiased" suppressHydrationWarning>
+      <body className="min-h-full text-[var(--color-text)]">
+        <ThemeProvider>
+          <LanguageProvider>
+            <AppShell>{children}</AppShell>
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -21,11 +21,11 @@ export function SectionShell({
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+        <h2 className="theme-text-main text-4xl font-semibold tracking-tight md:text-5xl">
           {title}
         </h2>
         {description ? (
-          <p className="text-lg leading-8 text-white/68">{description}</p>
+          <p className="theme-text-muted text-lg leading-8">{description}</p>
         ) : null}
       </div>
       {children}

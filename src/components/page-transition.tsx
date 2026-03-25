@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { useLanguage } from "@/lib/language";
 
 type PageTransitionProps = {
   children: ReactNode;
@@ -9,9 +10,10 @@ type PageTransitionProps = {
 
 export function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
+  const { locale } = useLanguage();
 
   return (
-    <div key={pathname} className="page-transition">
+    <div key={`${pathname}:${locale}`} className="page-transition">
       {children}
     </div>
   );

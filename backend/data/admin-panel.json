@@ -1,0 +1,26 @@
+{
+  "admins": [
+    {
+      "id": "af5a053f-2e07-4807-8ff2-ec978d6aa8c0",
+      "email": "hristoforovbruno@gmail.com",
+      "passwordHash": "$2a$12$5rj7lbwSVxDlChwmQ2PNU.Xj7tuz5uFrTHQJdzqf0sB4NbAYD/8D.",
+      "createdAt": "2026-03-22T14:02:13.514Z",
+      "updatedAt": "2026-03-22T15:04:33.328Z"
+    }
+  ],
+  "messages": [],
+  "settings": {
+    "id": "871e1bba-3e01-441e-871e-543acf1ec4ca",
+    "key": "default",
+    "publicEmail": "hristoforovbruno@gmail.com",
+    "contactPageText": {
+      "en": "Best for businesses that need a faster website, clearer trust signals, and a stronger path to enquiries.",
+      "et": "Best for businesses that need a faster website, clearer trust signals, and a stronger path to enquiries."
+    },
+    "createdAt": "2026-03-22T14:02:13.552Z",
+    "updatedAt": "2026-03-22T15:01:52.146Z",
+    "starterPrice": "from EUR 900",
+    "advancedPrice": "from EUR 1,800",
+    "maintenancePrice": "from EUR 120/mo"
+  }
+}

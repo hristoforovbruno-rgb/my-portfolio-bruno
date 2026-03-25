@@ -126,8 +126,8 @@
 .mockup {
   overflow: hidden;
   border-radius: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 10, 10, 0.92);
+  border: 1px solid var(--mock-frame-border);
+  background: var(--mock-frame-bg);
 }
 
 .browserBar {
@@ -135,14 +135,14 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--mock-frame-border);
 }
 
 .browserDot {
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.24);
+  background: var(--mock-dot);
 }
 
 .mockHero {
@@ -163,14 +163,14 @@
   margin: 0;
   font-size: clamp(2.25rem, 6vw, 4.3rem);
   line-height: 0.95;
-  color: #fff;
+  color: var(--mock-text-strong);
 }
 
 .mockText {
   max-width: 30rem;
   margin: 0;
   line-height: 1.8;
-  color: rgba(255, 249, 236, 0.72);
+  color: var(--mock-text);
 }
 
 .mockButtons {
@@ -188,13 +188,13 @@
 }
 
 .mockPrimary {
-  background: rgba(255, 249, 236, 0.96);
-  color: #090909;
+  background: var(--mock-button-bg);
+  color: var(--mock-button-text);
 }
 
 .mockGhost {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
+  border: 1px solid var(--mock-ghost-border);
+  color: var(--mock-ghost-text);
 }
 
 .mockCards {
@@ -206,8 +206,8 @@
 .mockCard {
   padding: 1rem;
   border-radius: 1.2rem;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 249, 236, 0.8);
+  background: var(--mock-card-bg);
+  color: var(--mock-card-text);
 }
 
 .sidebar {

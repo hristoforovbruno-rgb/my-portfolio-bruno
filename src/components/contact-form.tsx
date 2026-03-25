@@ -2,93 +2,140 @@
 
 import { useState } from "react";
 import { ArrowRightIcon } from "@/components/icons";
-import { contact } from "@/lib/site-content";
+import { getApiBaseUrl } from "@/lib/api-base-url";
+import { useLanguage } from "@/lib/language";
+import { usePublicCms } from "@/lib/public-cms";
+import { uiCopy } from "@/lib/ui-copy";
 
 const initialState = {
   name: "",
-  business: "",
+  phone: "",
   email: "",
   message: "",
 };
 
+const CONTACT_API_URL = `${getApiBaseUrl()}/api/contact`;
+
 export function ContactForm() {
   const [form, setForm] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { locale } = useLanguage();
+  const cms = usePublicCms();
+  const copy = uiCopy[locale].contactForm;
+  const formSettings = cms?.formSettings;
 
   return (
     <form
-      className="surface-card grid gap-5 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,17,17,0.95),rgba(9,9,9,0.92))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.42)] sm:p-7"
-      onSubmit={(event) => {
+      className="theme-surface surface-card grid gap-5 rounded-[2rem] p-5 sm:p-7"
+      onSubmit={async (event) => {
         event.preventDefault();
         setIsSubmitting(true);
+        setStatus("idle");
+        setErrorMessage(null);
 
-        const subject = encodeURIComponent(`Website audit request from ${form.name || "New lead"}`);
-        const body = encodeURIComponent(
-          `Name: ${form.name}\nBusiness: ${form.business}\nEmail: ${form.email}\n\nProject details:\n${form.message}`,
-        );
+        try {
+          const response = await fetch(CONTACT_API_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: form.name,
+              email: form.email,
+              phone: form.phone,
+              message: form.message,
+              locale,
+            }),
+          });
 
-        window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
-        window.setTimeout(() => setIsSubmitting(false), 400);
+          if (!response.ok) {
+            const data = response.headers.get("content-type")?.includes("application/json")
+              ? ((await response.json().catch(() => null)) as { error?: string } | null)
+              : null;
+
+            throw new Error(data?.error || "Request failed");
+          }
+
+          setStatus("success");
+          setForm(initialState);
+          setErrorMessage(formSettings?.successMessage?.[locale] || null);
+        } catch (error) {
+          setStatus("error");
+          setErrorMessage(error instanceof Error ? error.message : copy.errorMessage);
+        } finally {
+          setIsSubmitting(false);
+        }
       }}
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <label className="grid gap-2 text-sm text-white/72">
-          Name
+        <label className="theme-text-muted grid gap-2 text-sm">
+          {copy.nameLabel}
           <input
             required
             value={form.name}
             autoComplete="name"
             onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
-            className="field-shell rounded-2xl border border-white/12 bg-black/55 px-4 py-3 text-white outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
-            placeholder="Your name"
+            className="theme-field field-shell rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+            placeholder={copy.namePlaceholder}
           />
         </label>
-        <label className="grid gap-2 text-sm text-white/72">
-          Business
+        <label className="theme-text-muted grid gap-2 text-sm">
+          {copy.phoneLabel}
           <input
-            required
-            value={form.business}
-            autoComplete="organization"
-            onChange={(event) => setForm((current) => ({ ...current, business: event.target.value }))}
-            className="field-shell rounded-2xl border border-white/12 bg-black/55 px-4 py-3 text-white outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
-            placeholder="Business name"
+            value={form.phone}
+            autoComplete="tel"
+            onChange={(event) => setForm((current) => ({ ...current, phone: event.target.value }))}
+            className="theme-field field-shell rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+            placeholder={copy.phonePlaceholder}
           />
         </label>
       </div>
-      <label className="grid gap-2 text-sm text-white/72">
-        Email
+      <label className="theme-text-muted grid gap-2 text-sm">
+        {copy.emailLabel}
         <input
           required
           type="email"
           value={form.email}
           autoComplete="email"
           onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-          className="field-shell rounded-2xl border border-white/12 bg-black/55 px-4 py-3 text-white outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
-          placeholder="you@business.com"
+          className="theme-field field-shell rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+          placeholder={copy.emailPlaceholder}
         />
       </label>
-      <label className="grid gap-2 text-sm text-white/72">
-        What is hurting your website right now?
+      <label className="theme-text-muted grid gap-2 text-sm">
+        {copy.messageLabel}
         <textarea
           required
           rows={6}
           value={form.message}
           onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
-          className="field-shell rounded-[1.5rem] border border-white/12 bg-black/55 px-4 py-3 text-white outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
-          placeholder="Slow pages, low traffic, outdated design, poor enquiries..."
+          className="theme-field field-shell rounded-[1.5rem] px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+          placeholder={copy.messagePlaceholder}
         />
       </label>
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-6 py-3 text-sm font-semibold text-black transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_40px_rgba(212,175,55,0.2)] disabled:cursor-wait disabled:opacity-80"
+        disabled={isSubmitting || formSettings?.enabled === false}
+        className="interactive-button inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-6 py-3 text-sm font-semibold text-black disabled:cursor-wait disabled:opacity-80"
       >
-        {isSubmitting ? "Preparing Email..." : "Stop Losing Customers. Contact Me Today."}
+        {formSettings?.enabled === false ? "Form disabled" : isSubmitting ? copy.submitting : copy.submit}
         <ArrowRightIcon className="h-4 w-4" />
       </button>
-      <p className="text-sm leading-7 text-white/52">
-        Submitting opens your email app with the details filled in so you can send the request instantly.
+      <p className="theme-text-faint text-sm leading-7">
+        {copy.helperText}
       </p>
+      {status === "success" ? (
+        <p className="rounded-[1.2rem] border border-[var(--color-gold-soft)] bg-[rgba(212,175,55,0.08)] px-4 py-3 text-sm leading-7 text-[var(--color-gold-light)]">
+          {errorMessage || formSettings?.successMessage?.[locale] || copy.successMessage}
+        </p>
+      ) : null}
+      {status === "error" ? (
+        <p className="rounded-[1.2rem] border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm leading-7 text-red-200">
+          {errorMessage || copy.errorMessage}
+        </p>
+      ) : null}
     </form>
   );
 }

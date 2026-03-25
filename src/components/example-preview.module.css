@@ -1,9 +1,9 @@
 .frame {
   overflow: hidden;
   border-radius: 1.8rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 10, 10, 0.94);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--mock-frame-border);
+  background: var(--mock-frame-bg);
+  box-shadow: var(--mock-frame-shadow);
 }
 
 .bar {
@@ -11,14 +11,14 @@
   align-items: center;
   gap: 0.45rem;
   padding: 0.9rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--mock-frame-border);
 }
 
 .dot {
   width: 0.65rem;
   height: 0.65rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--mock-dot);
 }
 
 .viewport {
@@ -58,14 +58,14 @@
   margin: 0;
   font-size: clamp(2rem, 5vw, 4rem);
   line-height: 0.95;
-  color: #fff;
+  color: var(--mock-text-strong);
 }
 
 .copy {
   max-width: 32rem;
   margin: 0;
   line-height: 1.75;
-  color: rgba(255, 248, 229, 0.74);
+  color: var(--mock-text);
 }
 
 .actions {
@@ -83,20 +83,20 @@
 }
 
 .primary {
-  background: rgba(255, 248, 229, 0.96);
-  color: #090909;
+  background: var(--mock-button-bg);
+  color: var(--mock-button-text);
 }
 
 .ghost {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
+  border: 1px solid var(--mock-ghost-border);
+  color: var(--mock-ghost-text);
 }
 
 .card {
   padding: 0.95rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.06);
-  color: rgba(255, 248, 229, 0.82);
+  background: var(--mock-card-bg);
+  color: var(--mock-card-text);
   line-height: 1.5;
 }
 

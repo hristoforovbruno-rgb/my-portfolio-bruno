@@ -4,11 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run backend:dev\"",
+    "backend:dev": "npm --prefix backend run dev",
+    "backend:build": "npm --prefix backend run build",
     "build": "next build",
+    "build:all": "npm run build && npm run backend:build",
     "start": "next start",
-    "lint": "eslint"
+    "start:prod": "next start -p 3000",
+    "lint": "eslint",
+    "deploy": "npx vercel --prod"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "lucide-react": "^0.577.0",
+    "mongodb": "^7.1.1",
     "next": "16.2.0",
     "react": "19.2.4",
     "react-dom": "19.2.4"
@@ -19,6 +29,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.0",
     "tailwindcss": "^4",

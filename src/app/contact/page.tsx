@@ -1,22 +1,28 @@
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/contact-form";
-import { MailIcon, MapPinIcon, PhoneIcon } from "@/components/icons";
-import { SectionShell } from "@/components/section-shell";
-import { buildMetadata, contact, seoKeywords, siteUrl } from "@/lib/site-content";
+import { ContactPageContent } from "@/components/pages/contact-page-content";
+import { getSeoOverride } from "@/lib/admin-cms-server";
+import { buildMetadata, getSeoKeywords, getSiteContent, siteUrl } from "@/lib/site-content";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Contact Bruno Hristoforov | Stop Losing Customers Today",
-  description:
-    "Contact Bruno Hristoforov for a free website audit and a fast plan to improve trust, speed, SEO, and customer conversion.",
-  path: "/contact",
-  keywords: seoKeywords.contact,
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const override = await getSeoOverride("/contact");
+  return buildMetadata({
+    title: override?.title || "Contact Web Developer Tallinn | Kontakt Veebiarendaja Tallinn",
+    description:
+      override?.description ||
+      "Contact Bruno Hristoforov for a free website audit and a practical plan to improve trust, speed, local SEO, and customer conversion in Tallinn and across Estonia. Kontakt veebiarendaja Tallinn.",
+    path: override?.canonicalPath || "/contact",
+    keywords: override?.keywords || getSeoKeywords("contact"),
+  });
+}
 
 export default function ContactPage() {
+  const { contact } = getSiteContent("en");
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Bruno Hristoforov",
+    description:
+      "Freelance web developer in Tallinn, Estonia building fast business websites for local companies.",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Tallinn",
@@ -25,43 +31,32 @@ export default function ContactPage() {
     email: contact.email,
     telephone: contact.phone,
     jobTitle: "Freelance Web Developer",
+    knowsAbout: [
+      "Web development",
+      "Small business websites",
+      "Local SEO",
+      "Website redesign",
+    ],
+    areaServed: [
+      {
+        "@type": "Country",
+        name: "Estonia",
+      },
+      {
+        "@type": "City",
+        name: "Tallinn",
+      },
+    ],
     url: `${siteUrl}/contact`,
   };
 
   return (
-    <SectionShell
-      eyebrow="Contact"
-      title="Stop losing customers. Fix the website problem now."
-      description="Tell me what your current website is failing to do, and I will show you how to turn it into a stronger sales tool."
-    >
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="surface-card rounded-[2rem] border border-[var(--color-gold-soft)] bg-[linear-gradient(180deg,rgba(212,175,55,0.1),rgba(8,8,8,0.95)_30%)] p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">Direct Contact</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white">Free website audit</h2>
-          <div className="mt-6 grid gap-4 text-base leading-8 text-white/70">
-            <p className="flex items-center gap-3">
-              <MailIcon className="h-5 w-5 text-[var(--color-gold)]" />
-              {contact.email}
-            </p>
-            <p className="flex items-center gap-3">
-              <PhoneIcon className="h-5 w-5 text-[var(--color-gold)]" />
-              {contact.phone}
-            </p>
-            <p className="flex items-center gap-3">
-              <MapPinIcon className="h-5 w-5 text-[var(--color-gold)]" />
-              {contact.location}
-            </p>
-            <p>
-              Best for: small businesses, restaurants, gyms, clinics, and local service companies that want a website that sells harder.
-            </p>
-          </div>
-        </div>
-        <ContactForm />
-      </div>
-    </SectionShell>
+      <ContactPageContent />
+    </>
   );
 }

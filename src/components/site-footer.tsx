@@ -1,45 +1,73 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { MailIcon, MapPinIcon, PhoneIcon } from "@/components/icons";
-import { contact, navigation } from "@/lib/site-content";
+import { localizePath } from "@/lib/locale-routing";
+import { SiteLogo } from "@/components/site-logo";
+import { useLanguage } from "@/lib/language";
+import { usePublicCms } from "@/lib/public-cms";
+import { usePublicSettings } from "@/lib/public-settings";
+import { getSiteContent } from "@/lib/site-content";
 
 export function SiteFooter() {
+  const { locale } = useLanguage();
+  const content = getSiteContent(locale);
+  const settings = usePublicSettings();
+  const cms = usePublicCms();
+  const localizedContent = cms?.content?.[locale];
+  const publicEmail = settings?.publicEmail || content.contact.email;
+  const copy = locale === "en"
+    ? {
+        legal: "Legal",
+        privacy: "Privacy Policy",
+      }
+    : {
+        legal: "Juriidiline",
+        privacy: "Privaatsuspoliitika",
+      };
+
   return (
-    <footer className="border-t border-white/10 bg-black/50">
+    <footer className="border-t border-[var(--color-border)] bg-[color:var(--color-panel)]/70 backdrop-blur-sm">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.2fr_0.7fr_1fr] lg:px-8">
         <div className="space-y-4">
-          <Image src="/favicon.svg" alt="Bruno Hristoforov logo" width={64} height={64} className="h-14 w-auto object-contain sm:h-16" />
-          <h2 className="max-w-xl text-2xl font-semibold text-white">
-            Fast, persuasive websites for businesses that cannot afford to look slow, outdated, or invisible.
+          <SiteLogo width={64} height={64} className="block h-14 w-auto object-contain sm:h-16" />
+          <h2 className="theme-text-main max-w-xl text-2xl font-semibold">
+            {localizedContent?.footerTitle || content.ui.footerTitle}
           </h2>
-          <p className="max-w-lg text-sm leading-7 text-white/58">
-            Built for small businesses and local service companies that need a sharper first impression, better visibility, and a clearer path to enquiries.
+          <p className="theme-text-soft max-w-lg text-sm leading-7">
+            {localizedContent?.footerText || content.ui.footerText}
           </p>
         </div>
         <div className="space-y-3">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/50">Pages</p>
-          <div className="flex flex-col gap-2 text-sm text-white/72">
-            {navigation.map((item) => (
-              <Link key={item.href} prefetch href={item.href} className="transition-colors duration-300 hover:text-[var(--color-gold)]">
+          <p className="theme-text-faint text-sm font-semibold uppercase tracking-[0.3em]">{content.ui.footerPages}</p>
+          <div className="theme-text-muted flex flex-col gap-2 text-sm">
+            {content.navigation.map((item) => (
+              <Link key={item.href} prefetch href={localizePath(item.href, locale)} className="transition-colors duration-300 hover:text-[var(--color-gold)]">
                 {item.label}
               </Link>
             ))}
           </div>
         </div>
-        <div className="space-y-3 text-sm text-white/72">
-          <p className="font-semibold uppercase tracking-[0.3em] text-white/50">Contact</p>
-          <a href={`mailto:${contact.email}`} className="flex items-center gap-3 transition-colors duration-300 hover:text-[var(--color-gold)]">
+        <div className="theme-text-muted space-y-3 text-sm">
+          <p className="theme-text-faint font-semibold uppercase tracking-[0.3em]">{content.ui.footerContact}</p>
+          <a href={`mailto:${publicEmail}`} className="flex items-start gap-3 break-all transition-colors duration-300 hover:text-[var(--color-gold)]">
             <MailIcon className="h-4 w-4 text-[var(--color-gold)]" />
-            {contact.email}
+            {publicEmail}
           </a>
-          <a href={`tel:${contact.phone.replace(/\s+/g, "")}`} className="flex items-center gap-3 transition-colors duration-300 hover:text-[var(--color-gold)]">
+          <a href={`tel:${(localizedContent?.contactPhone || content.contact.phone).replace(/\s+/g, "")}`} className="flex items-start gap-3 transition-colors duration-300 hover:text-[var(--color-gold)]">
             <PhoneIcon className="h-4 w-4 text-[var(--color-gold)]" />
-            {contact.phone}
+            {localizedContent?.contactPhone || content.contact.phone}
           </a>
-          <p className="flex items-center gap-3">
+          <p className="flex items-start gap-3">
             <MapPinIcon className="h-4 w-4 text-[var(--color-gold)]" />
-            {contact.location}
+            {localizedContent?.contactLocation || content.contact.location}
           </p>
+          <div className="pt-3">
+            <p className="theme-text-faint mb-2 font-semibold uppercase tracking-[0.3em]">{copy.legal}</p>
+            <Link prefetch href={localizePath("/privacy-policy", locale)} className="transition-colors duration-300 hover:text-[var(--color-gold)]">
+              {copy.privacy}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
