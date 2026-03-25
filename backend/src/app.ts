@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
-import helmetImport from "helmet";
 import morgan from "morgan";
+import { createRequire } from "node:module";
 import { env } from "./config/env.js";
 import { bootstrapApp } from "./bootstrap.js";
 import { authRoutes } from "./routes/auth.routes.js";
@@ -11,16 +11,12 @@ import { dashboardRoutes } from "./routes/dashboard.routes.js";
 import { settingsRoutes } from "./routes/settings.routes.js";
 import { errorHandler } from "./middleware/error-handler.js";
 
-const helmet = (helmetImport as unknown as { default?: typeof helmetImport } | typeof helmetImport);
-const helmetMiddleware = typeof helmet === "function" ? helmet : helmet.default;
-
-if (!helmetMiddleware) {
-  throw new Error("Helmet middleware is unavailable.");
-}
+const require = createRequire(import.meta.url);
+const helmet = require("helmet") as () => express.RequestHandler;
 
 export const app = express();
 
-app.use(helmetMiddleware());
+app.use(helmet());
 app.use(
   cors({
     origin: env.CORS_ORIGIN.split(",").map((value) => value.trim()),
