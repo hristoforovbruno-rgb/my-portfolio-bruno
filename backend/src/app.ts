@@ -51,10 +51,16 @@ app.use(async (_request, _response, next) => {
   }
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/contact", contactRoutes);
-app.use("/api/cms", cmsRoutes);
-app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/settings", settingsRoutes);
+const apiRouter = express.Router();
+
+apiRouter.use("/auth", authRoutes);
+apiRouter.use("/contact", contactRoutes);
+apiRouter.use("/cms", cmsRoutes);
+apiRouter.use("/dashboard", dashboardRoutes);
+apiRouter.use("/settings", settingsRoutes);
+
+// Support both local Node hosting (`/api/*`) and Vercel serverless mounting (`/*` inside api/[...path]).
+app.use(apiRouter);
+app.use("/api", apiRouter);
 
 app.use(errorHandler);
