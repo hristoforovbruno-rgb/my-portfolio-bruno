@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { AdminGuard } from "@/components/admin/admin-guard";
 import { AdminShell } from "@/components/admin/admin-shell";
+import { getApiBaseUrl } from "@/lib/api-base-url";
 import { type AdminMessage, type MessagesResponse, apiRequest } from "@/lib/admin-api";
 
 export default function AdminMessagesPage() {
@@ -73,7 +74,7 @@ export default function AdminMessagesPage() {
   }
 
   async function exportCsv() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_ADMIN_API_URL || "http://localhost:4000"}/api/contact/export`, {
+    const response = await fetch(`${getApiBaseUrl()}/api/contact/export`, {
       headers: {
         Authorization: `Bearer ${window.localStorage.getItem("admin_token") || ""}`,
       },

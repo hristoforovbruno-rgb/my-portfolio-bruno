@@ -5,14 +5,14 @@ This project includes:
 - a public Next.js website
 - a TypeScript Express backend under `backend/`
 - an admin panel at `/admin`
-- local file-backed admin storage in `backend/data/`
+- MongoDB-backed admin storage
 - contact form management, content editing, SEO editing, backups, and activity logging
 
 ## Stack
 
 - Frontend: Next.js + React + TypeScript
 - Backend: Node.js + Express + TypeScript
-- Storage: local JSON files in `backend/data/`
+- Storage: MongoDB
 - Auth: bcrypt + JWT
 - Email: Resend (optional, for notifications + auto-reply)
 
@@ -33,6 +33,7 @@ Create `my-app/backend/.env`:
 ```env
 NODE_ENV=development
 PORT=4000
+MONGODB_URI=mongodb://127.0.0.1:27017/portfolio-admin
 JWT_SECRET=replace_with_a_long_random_secret
 JWT_EXPIRES_IN=7d
 ADMIN_EMAIL=admin@example.com
@@ -71,14 +72,60 @@ Backend health:
 - Email: `admin@example.com`
 - Password: `ChangeMe123!`
 
-## Production Recommendation
+## Vercel Backend Deployment
 
-Best fit for this project: `VPS`.
+The backend can now be deployed to Vercel as a serverless Express function.
 
-Reason:
-- the backend stores admin data in local files
-- those files need persistent disk
-- a VPS is more reliable than serverless hosting for this architecture
+Important:
+- persistent local disk is not available on Vercel
+- this backend must use `MONGODB_URI` in production
+- the backend health endpoint on Vercel is `/api/health`
+
+### Deploy `backend/` as its own Vercel project
+
+1. Set the project root to `my-app/backend`
+2. Add these environment variables in Vercel:
+   - `NODE_ENV=production`
+   - `MONGODB_URI`
+   - `JWT_SECRET`
+   - `JWT_EXPIRES_IN=7d`
+   - `ADMIN_EMAIL`
+   - `ADMIN_PASSWORD`
+   - `CORS_ORIGIN=https://your-frontend-domain.vercel.app`
+   - `RESEND_API_KEY` if you use email sending
+   - `RESEND_FROM_EMAIL`
+   - `CONTACT_NOTIFICATION_EMAIL`
+3. Deploy
+
+Your backend routes will stay under `/api/*`, for example:
+- `/api/health`
+- `/api/auth/login`
+- `/api/contact`
+
+## Vercel Frontend Deployment
+
+Deploy `my-app/` as a separate Vercel project for the Next.js frontend.
+
+1. Set the project root to `my-app`
+2. Add this environment variable:
+   - `NEXT_PUBLIC_ADMIN_API_URL=https://your-backend-project.vercel.app`
+3. Deploy
+
+### Frontend env for Vercel
+
+Set `NEXT_PUBLIC_ADMIN_API_URL` in the frontend project to your backend Vercel URL, for example:
+
+```env
+NEXT_PUBLIC_ADMIN_API_URL=https://your-backend-project.vercel.app
+```
+
+### Recommended Vercel setup
+
+- Create one Vercel project for `my-app`
+- Create one Vercel project for `my-app/backend`
+- Set backend `CORS_ORIGIN` to the frontend Vercel domain
+- Set frontend `NEXT_PUBLIC_ADMIN_API_URL` to the backend Vercel domain
+- If you use preview deployments, add the matching preview domains as allowed CORS origins too
 
 ## VPS Deployment
 
@@ -167,9 +214,7 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
 ## Notes
 
-- Admin data is stored in:
-  - `backend/data/admin-panel.json`
-  - `backend/data/admin-cms.json`
-- Keep regular backups from `/admin/backups`
-- If you change the admin password in the panel, the env default may no longer match
-- Resend emails only work when `RESEND_API_KEY` is set
+- Admin and CMS data are stored in MongoDB.
+- Keep regular backups from `/admin/backups`.
+- If you change the admin password in the panel, the env default may no longer match.
+- Resend emails only work when `RESEND_API_KEY` is set.

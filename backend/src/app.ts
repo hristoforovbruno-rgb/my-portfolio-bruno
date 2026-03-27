@@ -27,7 +27,7 @@ app.use(
 app.use(express.json());
 app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
 
-app.get("/health", (_request, response) => {
+function sendHealth(_request: express.Request, response: express.Response) {
   response.json({
     ok: true,
     database:
@@ -37,7 +37,10 @@ app.get("/health", (_request, response) => {
           ? "connecting"
           : "disconnected",
   });
-});
+}
+
+app.get("/health", sendHealth);
+app.get("/api/health", sendHealth);
 
 app.use(async (_request, _response, next) => {
   try {
