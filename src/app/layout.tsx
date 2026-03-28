@@ -9,10 +9,14 @@ const themeInitScript = `
   (() => {
     try {
       const storedTheme = window.localStorage.getItem("portfolio-theme");
+      const storedOverride = window.localStorage.getItem("portfolio-theme-override");
       const systemTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-      const theme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : systemTheme;
+      const theme = storedOverride === "light" || storedOverride === "dark" ? storedOverride : systemTheme;
       document.documentElement.dataset.theme = theme;
       document.documentElement.style.colorScheme = theme;
+      if (storedTheme === "light" || storedTheme === "dark") {
+        window.localStorage.removeItem("portfolio-theme");
+      }
     } catch {
       document.documentElement.dataset.theme = "dark";
       document.documentElement.style.colorScheme = "dark";

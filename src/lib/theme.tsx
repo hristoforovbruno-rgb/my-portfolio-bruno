@@ -16,7 +16,8 @@ type ThemeContextValue = {
   toggleTheme: () => void;
 };
 
-const STORAGE_KEY = "portfolio-theme";
+const STORAGE_KEY = "portfolio-theme-override";
+const LEGACY_STORAGE_KEY = "portfolio-theme";
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 const listeners = new Set<() => void>();
 
@@ -48,6 +49,7 @@ function getStoredTheme(): Theme {
 
 function setStoredTheme(theme: Theme) {
   window.localStorage.setItem(STORAGE_KEY, theme);
+  window.localStorage.removeItem(LEGACY_STORAGE_KEY);
   listeners.forEach((listener) => listener());
 }
 
@@ -70,6 +72,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [theme]);
 
   useEffect(() => {
+    window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+
     const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
 
     const handleChange = () => {
@@ -79,7 +83,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     };
 
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY) {
+      if (event.key === STORAGE_KEY || event.key === LEGACY_STORAGE_KEY) {
         listeners.forEach((listener) => listener());
       }
     };
