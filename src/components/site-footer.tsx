@@ -28,7 +28,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-[color:var(--color-panel)]/70 backdrop-blur-sm">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.2fr_0.7fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.7fr_1fr] lg:px-8">
         <div className="space-y-4">
           <SiteLogo width={64} height={64} className="block h-14 w-auto object-contain sm:h-16" />
           <h2 className="theme-text-main max-w-xl text-2xl font-semibold">

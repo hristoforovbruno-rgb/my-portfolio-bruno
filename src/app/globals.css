@@ -96,8 +96,11 @@
   box-sizing: border-box;
 }
 
-body,
-body * {
+a,
+button,
+input,
+textarea,
+select {
   transition:
     color 220ms ease,
     background-color 220ms ease,
@@ -124,6 +127,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+textarea {
+  resize: vertical;
 }
 
 a {
@@ -414,6 +436,10 @@ article:hover .project-gradient {
 @media (max-width: 1024px) {
   html {
     scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-attachment: scroll;
   }
 }
 

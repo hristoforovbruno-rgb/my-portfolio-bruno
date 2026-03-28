@@ -8,6 +8,7 @@ const RESEND_API_URL = "https://api.resend.com/emails";
 type ContactPayload = {
   name?: string;
   business?: string;
+  phone?: string;
   email?: string;
   message?: string;
   preferredLocale?: "en" | "et";
@@ -93,6 +94,7 @@ function getForwardedCopy(language: "en" | "et", isLowPriority: boolean) {
       priority: "Prioriteet",
       name: "Nimi",
       business: "Ettev\u00f5te",
+      phone: "Telefon",
       originalMessage: "Algne s\u00f5num",
       lowPriority: "madal prioriteet",
       normal: "tavaline",
@@ -112,6 +114,7 @@ function getForwardedCopy(language: "en" | "et", isLowPriority: boolean) {
     priority: "Priority",
     name: "Name",
     business: "Business",
+    phone: "Phone",
     originalMessage: "Original message",
     lowPriority: "low priority",
     normal: "normal",
@@ -150,6 +153,7 @@ export async function POST(request: Request) {
     const payload = (await request.json()) as ContactPayload;
     const name = payload.name?.trim() || "Unknown";
     const business = payload.business?.trim() || "";
+    const phone = payload.phone?.trim() || "";
     const email = payload.email?.trim() || "";
     const message = payload.message?.trim() || "";
     const preferredLocale = payload.preferredLocale ?? payload.locale;
@@ -181,6 +185,7 @@ export async function POST(request: Request) {
       `${forwardedCopy.priority}: ${isLowPriority ? forwardedCopy.lowPriority : forwardedCopy.normal}`,
       `${forwardedCopy.name}: ${name || forwardedCopy.unknown}`,
       `${forwardedCopy.business}: ${business || forwardedCopy.notProvided}`,
+      `${forwardedCopy.phone}: ${phone || forwardedCopy.notProvided}`,
       "",
       `${forwardedCopy.originalMessage}:`,
       message || forwardedCopy.emptyMessage,
