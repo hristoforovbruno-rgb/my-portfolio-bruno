@@ -14,6 +14,18 @@ type ReplyBody = {
   replyText?: string;
 };
 
+function getReplyEmailConfig() {
+  const resendApiKey = process.env.RESEND_API_KEY?.trim();
+  const fromEmail = process.env.CONTACT_FROM_EMAIL?.trim() || process.env.RESEND_FROM_EMAIL?.trim();
+  const ownerEmail = process.env.CONTACT_OWNER_EMAIL?.trim() || process.env.CONTACT_NOTIFICATION_EMAIL?.trim() || getSiteContent("en").contact.email;
+
+  return {
+    resendApiKey,
+    fromEmail,
+    ownerEmail,
+  };
+}
+
 async function sendReplyEmail({
   apiKey,
   from,
@@ -70,9 +82,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "messageId and replyText are required" }, { status: 400 });
   }
 
-  const resendApiKey = process.env.RESEND_API_KEY;
-  const fromEmail = process.env.CONTACT_FROM_EMAIL;
-  const ownerEmail = process.env.CONTACT_OWNER_EMAIL || getSiteContent("en").contact.email;
+  const { resendApiKey, fromEmail, ownerEmail } = getReplyEmailConfig();
 
   if (!resendApiKey || !fromEmail) {
     return NextResponse.json({ error: "Email service is not configured." }, { status: 500 });

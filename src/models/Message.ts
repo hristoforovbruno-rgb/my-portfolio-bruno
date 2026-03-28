@@ -12,6 +12,11 @@ const MessageSchema = new Schema(
       required: true,
       trim: true,
     },
+    phone: {
+      type: String,
+      default: "",
+      trim: true,
+    },
     message: {
       type: String,
       required: true,

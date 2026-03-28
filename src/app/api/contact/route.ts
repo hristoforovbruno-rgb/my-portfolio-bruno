@@ -16,6 +16,18 @@ type ContactPayload = {
   locale?: "en" | "et";
 };
 
+function getContactEmailConfig() {
+  const resendApiKey = process.env.RESEND_API_KEY?.trim();
+  const fromEmail = process.env.CONTACT_FROM_EMAIL?.trim() || process.env.RESEND_FROM_EMAIL?.trim();
+  const ownerEmail = process.env.CONTACT_OWNER_EMAIL?.trim() || process.env.CONTACT_NOTIFICATION_EMAIL?.trim() || getSiteContent("en").contact.email;
+
+  return {
+    resendApiKey,
+    fromEmail,
+    ownerEmail,
+  };
+}
+
 function detectLanguage(message: string) {
   const normalized = message.toLowerCase();
   const estonianSignals = [
@@ -167,17 +179,23 @@ export async function POST(request: Request) {
     const message = payload.message?.trim() || "";
     const preferredLocale = payload.preferredLocale ?? payload.locale;
 
+    if (!name || name === "Unknown") {
+      return NextResponse.json({ error: "Name is required." }, { status: 400 });
+    }
+
     if (!email) {
       return NextResponse.json({ error: "Email is required." }, { status: 400 });
     }
 
-    const resendApiKey = process.env.RESEND_API_KEY;
-    const fromEmail = process.env.CONTACT_FROM_EMAIL;
-    const ownerEmail = process.env.CONTACT_OWNER_EMAIL || getSiteContent("en").contact.email;
+    if (!message) {
+      return NextResponse.json({ error: "Message is required." }, { status: 400 });
+    }
+
+    const { resendApiKey, fromEmail, ownerEmail } = getContactEmailConfig();
 
     if (!resendApiKey || !fromEmail) {
       return NextResponse.json(
-        { error: "Email service is not configured. Set RESEND_API_KEY and CONTACT_FROM_EMAIL in .env.local." },
+        { error: "Email service is not configured. Set RESEND_API_KEY and CONTACT_FROM_EMAIL or RESEND_FROM_EMAIL in .env.local." },
         { status: 500 },
       );
     }
@@ -209,6 +227,14 @@ export async function POST(request: Request) {
       replyTo: email,
     });
 
+    await connectToDatabase();
+    await Message.create({
+      name,
+      email,
+      phone,
+      message,
+    });
+
     const autoReplyCopy = getAutoReplyCopy(language);
     const displayName = name === "Unknown" ? autoReplyCopy.fallbackName : name;
     const autoReplyText = [
@@ -223,32 +249,29 @@ export async function POST(request: Request) {
       "Bruno Hristoforov",
     ].join("\n");
 
-    await sendEmail({
-      apiKey: resendApiKey,
-      from: fromEmail,
-      to: email,
-      subject: autoReplyCopy.subject,
-      text: autoReplyText,
-      html: renderCustomerEmailTemplate({
-        eyebrow: autoReplyCopy.eyebrow,
-        title: autoReplyCopy.title,
-        intro: `${autoReplyCopy.greeting} ${displayName},`,
-        body: autoReplyCopy.intro,
-        summaryLabel: autoReplyCopy.summaryTitle,
-        summaryValue: message || forwardedCopy.emptyMessage,
-        ctaLabel: autoReplyCopy.ctaLabel,
-        ctaHref: `${request.headers.get("origin") || "https://brunodev.ee"}/services`,
-        signature: `${autoReplyCopy.signoff},\nBruno Hristoforov`,
-        footerText: autoReplyCopy.footerText,
-      }),
-    });
-
-    await connectToDatabase();
-    await Message.create({
-      name,
-      email,
-      message,
-    });
+    try {
+      await sendEmail({
+        apiKey: resendApiKey,
+        from: fromEmail,
+        to: email,
+        subject: autoReplyCopy.subject,
+        text: autoReplyText,
+        html: renderCustomerEmailTemplate({
+          eyebrow: autoReplyCopy.eyebrow,
+          title: autoReplyCopy.title,
+          intro: `${autoReplyCopy.greeting} ${displayName},`,
+          body: autoReplyCopy.intro,
+          summaryLabel: autoReplyCopy.summaryTitle,
+          summaryValue: message || forwardedCopy.emptyMessage,
+          ctaLabel: autoReplyCopy.ctaLabel,
+          ctaHref: `${request.headers.get("origin") || "https://brunodev.ee"}/services`,
+          signature: `${autoReplyCopy.signoff},\nBruno Hristoforov`,
+          footerText: autoReplyCopy.footerText,
+        }),
+      });
+    } catch (autoReplyError) {
+      console.warn("Contact auto-reply failed", autoReplyError);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

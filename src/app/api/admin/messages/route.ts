@@ -8,6 +8,7 @@ type SerializedMessage = {
   id: string;
   name: string;
   email: string;
+  phone: string;
   message: string;
   read: boolean;
   repliedAt: string | null;
@@ -19,6 +20,7 @@ function serializeMessage(message: MessageDocument): SerializedMessage {
     id: message._id.toString(),
     name: message.name,
     email: message.email,
+    phone: message.phone || "",
     message: message.message,
     read: message.read,
     repliedAt: message.repliedAt ? message.repliedAt.toISOString() : null,
