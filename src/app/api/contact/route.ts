@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { renderCustomerEmailTemplate } from "@/lib/customer-email-template";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getSiteContent } from "@/lib/site-content";
 import Message from "@/models/Message";
@@ -133,7 +134,11 @@ function getAutoReplyCopy(language: "en" | "et") {
       greeting: "Tere",
       intro: "Ait\u00e4h, et v\u00f5tsid \u00fchendust. Sain sinu s\u00f5numi k\u00e4tte ja vastan tavaliselt 24 tunni jooksul.",
       summaryTitle: "Sinu saadetud s\u00f5num",
+      eyebrow: "Kontakt kinnitatud",
+      title: "Sain sinu p\u00e4ringu k\u00e4tte",
+      ctaLabel: "Vaata teenuseid",
       signoff: "Parimate soovidega",
+      footerText: "See kinnitus saadeti automaatselt p\u00e4rast kontaktivormi esitust.",
       fallbackName: "s\u00f5ber",
     };
   }
@@ -143,7 +148,11 @@ function getAutoReplyCopy(language: "en" | "et") {
     greeting: "Hi",
     intro: "Thanks for reaching out. I received your message and usually reply within 24 hours.",
     summaryTitle: "Your message",
+    eyebrow: "Contact confirmed",
+    title: "Your message is in",
+    ctaLabel: "View services",
     signoff: "Best regards",
+    footerText: "This confirmation was sent automatically after your contact form submission.",
     fallbackName: "there",
   };
 }
@@ -220,6 +229,18 @@ export async function POST(request: Request) {
       to: email,
       subject: autoReplyCopy.subject,
       text: autoReplyText,
+      html: renderCustomerEmailTemplate({
+        eyebrow: autoReplyCopy.eyebrow,
+        title: autoReplyCopy.title,
+        intro: `${autoReplyCopy.greeting} ${displayName},`,
+        body: autoReplyCopy.intro,
+        summaryLabel: autoReplyCopy.summaryTitle,
+        summaryValue: message || forwardedCopy.emptyMessage,
+        ctaLabel: autoReplyCopy.ctaLabel,
+        ctaHref: `${request.headers.get("origin") || "https://brunodev.ee"}/services`,
+        signature: `${autoReplyCopy.signoff},\nBruno Hristoforov`,
+        footerText: autoReplyCopy.footerText,
+      }),
     });
 
     await connectToDatabase();

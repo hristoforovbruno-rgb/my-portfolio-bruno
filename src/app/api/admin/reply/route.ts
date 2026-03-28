@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { renderCustomerEmailTemplate } from "@/lib/customer-email-template";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getSiteContent } from "@/lib/site-content";
 import Message from "@/models/Message";
@@ -36,19 +37,16 @@ async function sendReplyEmail({
       from,
       to: [to],
       subject,
-      html: `
-        <div style="font-family: Georgia, serif; color: #f5f1e6; background: #090909; padding: 32px;">
-          <div style="max-width: 640px; margin: 0 auto; border: 1px solid rgba(212, 175, 55, 0.24); border-radius: 24px; padding: 32px; background: linear-gradient(180deg, #171717, #0d0d0d);">
-            <p style="margin: 0 0 16px; color: #f0d985; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;">Reply from ${OWNER_NAME}</p>
-            <div style="font-family: 'Courier New', monospace; white-space: pre-wrap; line-height: 1.7; color: #f5f1e6;">${replyText
-              .replace(/&/g, "&amp;")
-              .replace(/</g, "&lt;")
-              .replace(/>/g, "&gt;")
-              .replace(/\n/g, "<br />")}</div>
-            <p style="margin: 24px 0 0; color: rgba(245, 241, 230, 0.74);">Best regards,<br />${OWNER_NAME}</p>
-          </div>
-        </div>
-      `,
+      html: renderCustomerEmailTemplate({
+        eyebrow: `Reply from ${OWNER_NAME}`,
+        title: "Thanks for reaching out",
+        intro: "Here is my reply to your message.",
+        body: replyText,
+        ctaLabel: "Visit website",
+        ctaHref: "https://brunodev.ee",
+        signature: `Best regards,\n${OWNER_NAME}`,
+        footerText: "You are receiving this because you contacted Bruno Hristoforov through the website contact form.",
+      }),
       text: replyText,
     }),
   });
