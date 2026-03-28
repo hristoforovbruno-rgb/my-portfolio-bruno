@@ -39,6 +39,13 @@ function sendHealth(_request: express.Request, response: express.Response) {
   });
 }
 
+app.get("/", (_request, response) => {
+  response.json({
+    ok: true,
+    service: "backend",
+  });
+});
+
 app.get("/health", sendHealth);
 app.get("/api/health", sendHealth);
 
