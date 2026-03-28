@@ -50,7 +50,7 @@ export default function AdminLoginPage() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-[var(--color-gold)] focus:bg-white/8"
-              placeholder="admin@example.com"
+              placeholder="example@mail.com"
             />
           </label>
 
