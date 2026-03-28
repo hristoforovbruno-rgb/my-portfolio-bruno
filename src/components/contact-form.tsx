@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ArrowRightIcon } from "@/components/icons";
-import { getApiBaseUrl } from "@/lib/api-base-url";
 import { useLanguage } from "@/lib/language";
 import { usePublicCms } from "@/lib/public-cms";
 import { uiCopy } from "@/lib/ui-copy";
@@ -14,7 +13,7 @@ const initialState = {
   message: "",
 };
 
-const CONTACT_API_URL = `${getApiBaseUrl()}/api/contact`;
+const CONTACT_API_URL = "/api/contact";
 
 export function ContactForm() {
   const [form, setForm] = useState(initialState);
