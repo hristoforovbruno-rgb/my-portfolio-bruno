@@ -5,7 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useSyncExternalStore,
+  useState,
   type ReactNode,
 } from "react";
 
@@ -19,12 +19,6 @@ type ThemeContextValue = {
 const STORAGE_KEY = "portfolio-theme-override";
 const LEGACY_STORAGE_KEY = "portfolio-theme";
 const ThemeContext = createContext<ThemeContextValue | null>(null);
-const listeners = new Set<() => void>();
-
-function subscribe(listener: () => void) {
-  listeners.add(listener);
-  return () => listeners.delete(listener);
-}
 
 function getSystemTheme(): Theme {
   if (typeof window === "undefined") {
@@ -34,37 +28,22 @@ function getSystemTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 }
 
-function getStoredTheme(): Theme {
+function getInitialTheme(): Theme {
   if (typeof window === "undefined") {
     return "dark";
   }
 
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  if (stored === "light" || stored === "dark") {
-    return stored;
+  const override = window.localStorage.getItem(STORAGE_KEY);
+
+  if (override === "light" || override === "dark") {
+    return override;
   }
 
   return getSystemTheme();
 }
 
-function setStoredTheme(theme: Theme) {
-  window.localStorage.setItem(STORAGE_KEY, theme);
-  window.localStorage.removeItem(LEGACY_STORAGE_KEY);
-  listeners.forEach((listener) => listener());
-}
-
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const theme = useSyncExternalStore<Theme>(subscribe, getStoredTheme, () => "dark");
-
-  const value = useMemo<ThemeContextValue>(
-    () => ({
-      theme,
-      toggleTheme: () => {
-        setStoredTheme(theme === "dark" ? "light" : "dark");
-      },
-    }),
-    [theme],
-  );
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -77,24 +56,41 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
 
     const handleChange = () => {
-      if (!window.localStorage.getItem(STORAGE_KEY)) {
-        listeners.forEach((listener) => listener());
+      const override = window.localStorage.getItem(STORAGE_KEY);
+
+      if (override !== "light" && override !== "dark") {
+        setTheme(getSystemTheme());
       }
     };
 
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY || event.key === LEGACY_STORAGE_KEY) {
-        listeners.forEach((listener) => listener());
+      if (event.key !== STORAGE_KEY && event.key !== LEGACY_STORAGE_KEY) {
+        return;
       }
+
+      setTheme(getInitialTheme());
     };
 
     mediaQuery.addEventListener("change", handleChange);
     window.addEventListener("storage", handleStorage);
+
     return () => {
       mediaQuery.removeEventListener("change", handleChange);
       window.removeEventListener("storage", handleStorage);
     };
   }, []);
+
+  const value = useMemo<ThemeContextValue>(
+    () => ({
+      theme,
+      toggleTheme: () => {
+        const nextTheme = theme === "dark" ? "light" : "dark";
+        window.localStorage.setItem(STORAGE_KEY, nextTheme);
+        setTheme(nextTheme);
+      },
+    }),
+    [theme],
+  );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
