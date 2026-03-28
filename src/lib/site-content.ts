@@ -304,7 +304,7 @@ const siteContent = {
       },
       {
         name: "Monthly Maintenance",
-        price: "from EUR 120/mo",
+        price: "from EUR 29/mo",
         description: "For businesses that want speed, updates, and reliability without chasing fixes.",
         points: ["Content updates", "Performance checks", "SEO upkeep", "Priority support"],
       },
@@ -680,7 +680,7 @@ const siteContent = {
       },
       {
         name: "Igakuine hooldus",
-        price: "alates 120 €/kuu",
+        price: "alates 29 €/kuu",
         description: "Ettevõtetele, kes tahavad kiirust, uuendusi ja töökindlust ilma parandusi taga ajamata.",
         points: ["Sisuuuendused", "Jõudluskontrollid", "SEO korrashoid", "Prioriteetne tugi"],
       },
