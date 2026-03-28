@@ -78,8 +78,18 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       }
     };
 
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === STORAGE_KEY) {
+        listeners.forEach((listener) => listener());
+      }
+    };
+
     mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    window.addEventListener("storage", handleStorage);
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+      window.removeEventListener("storage", handleStorage);
+    };
   }, []);
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
