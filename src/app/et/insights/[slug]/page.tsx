@@ -7,6 +7,7 @@ export function generateStaticParams() {
   return insightPosts.map((post) => ({ slug: post.slug }));
 }
 
+// Server-rendered page metadata for each Estonian insight article.
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = getExpandedContent("et").insightPosts.find((entry) => entry.slug === slug);
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: post.description,
     path: `/et/insights/${post.slug}`,
     keywords: post.keywords,
-    languages: {
-      en: `/insights/${post.slug}`,
-      et: `/et/insights/${post.slug}`,
-    },
+    locale: "et",
   });
 }
 

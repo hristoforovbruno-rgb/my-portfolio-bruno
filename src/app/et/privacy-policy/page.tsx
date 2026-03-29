@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { PrivacyPolicyPageContent } from "@/components/pages/privacy-policy-page-content";
 import { buildMetadata } from "@/lib/site-content";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Privaatsuspoliitika | Bruno Hristoforov",
-  description: "Privaatsuspoliitika Bruno Hristoforovi veebilehele Eestis ja Euroopa Liidus.",
-  path: "/et/privacy-policy",
-  languages: {
-    en: "/privacy-policy",
-    et: "/et/privacy-policy",
-  },
-});
+// Server-rendered page metadata for the Estonian privacy policy.
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Privaatsuspoliitika",
+    description:
+      "Bruno Hristoforovi veebilehe privaatsuspoliitika, sealhulgas kuidas käsitletakse kontaktandmeid, küpsiseid ja brauseri salvestust Eestis ja Euroopa Liidus.",
+    path: "/et/privacy-policy",
+    locale: "et",
+  });
+}
 
 export default function EstonianPrivacyPolicyPage() {
   return <PrivacyPolicyPageContent />;

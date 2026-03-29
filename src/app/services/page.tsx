@@ -3,15 +3,18 @@ import { ServicesPageContent } from "@/components/pages/services-page-content";
 import { getSeoOverride } from "@/lib/admin-cms-server";
 import { buildMetadata, getSeoKeywords } from "@/lib/site-content";
 
+// Server-rendered page metadata for the English services route.
 export async function generateMetadata(): Promise<Metadata> {
   const override = await getSeoOverride("/services");
+
   return buildMetadata({
-    title: override?.title || "Web Development Services Tallinn | Veebiarendus ja SEO Eestis",
+    title: override?.title || "Services",
     description:
       override?.description ||
-      "Website development, SEO optimization, redesigns, and maintenance plans for businesses in Tallinn and Estonia that need faster pages, stronger trust, and better enquiries. Veebiarendus, SEO ja hooldus Eestis.",
+      "Web development services by Bruno Hristoforov. Custom websites, landing pages, and web apps for businesses in Estonia and beyond.",
     path: override?.canonicalPath || "/services",
     keywords: override?.keywords || getSeoKeywords("services"),
+    locale: "en",
   });
 }
 

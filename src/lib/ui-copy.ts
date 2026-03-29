@@ -255,7 +255,7 @@
       heroEyebrow: "Veebiarendaja Tallinnas, Eestis",
       heroTitle: "Sinu veebileht kas võidab kliente või tõukab neid vaikselt eemale.",
       heroDescription:
-        "Ehitan kiireid ja kaasaegseid veebilehti, mis aitavad väikeettevõtetel ja kohalikel teenusfirmadel mõjuda usaldusväärselt, olla paremini leitavad ja muuta rohkem külastusi reaalseks käibeks.",
+        "Ehitan kiireid ja kaasaegseid veebilehti, kus veebiarendus, koduleht ja selge müügisõnum aitavad Tallinna ja Eesti ettevõtetel olla paremini leitavad ning teenida rohkem päringuid.",
       heroPrimaryCta: "Küsi tasuta veebiauditit enne, kui kaotad veel kliente",
       heroSecondaryCta: "Vaata teenuseid",
       heroStats: [
@@ -281,7 +281,7 @@
       aboutSectionDescription:
         "Töötan Reacti, TypeScripti, Node.js-i, Next.js-i ja SEO-ga, aga point ei ole tehnoloogias. Point on aidata sinu ettevõttel mõjuda usaldusväärsemalt, laadida kiiremini ja konverteerida paremini.",
       aboutSectionBody:
-        "Toon kaasa kiiruse, ambitsiooni ja tähelepanu detailidele, mida enamik ettevõtteid oma praeguselt veebilt sooviks. Iga paigutus, pealkiri ja tegevuskutse on ehitatud selleks, et külastaja tunneks üht asja: selle ettevõttega tasub kohe ühendust võtta.",
+        "Toon kaasa kiiruse, ambitsiooni ja tähelepanu detailidele, mida enamik ettevõtteid oma praeguselt veebilt sooviks. Tallinn, Eesti, veebiarendus ja koduleht ei ole siin lihtsalt märksõnad, vaid osa sellest, kuidas ehitan lehe, mis paneb külastaja tundma, et selle ettevõttega tasub kohe ühendust võtta.",
       servicesEyebrow: "Teenused",
       servicesTitle: "Mida ma parandan enne, kui sinu veeb kaotab sulle veel rohkem äri.",
       servicesDescription:

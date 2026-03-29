@@ -8,22 +8,23 @@ export function generateStaticParams() {
   return serviceDetails.map((service) => ({ slug: service.slug }));
 }
 
-export function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  return params.then(async ({ slug }) => {
-    const service = serviceDetails.find((entry) => entry.slug === slug);
-    const localizedService = getExpandedContent("et").serviceDetails.find((entry) => entry.slug === slug);
-    const override = await getSeoOverride(`/services/${slug}`);
+// Server-rendered page metadata for each English service detail route.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const service = serviceDetails.find((entry) => entry.slug === slug);
+  const localizedService = getExpandedContent("et").serviceDetails.find((entry) => entry.slug === slug);
+  const override = await getSeoOverride(`/services/${slug}`);
 
-    if (!service) {
-      return {};
-    }
+  if (!service) {
+    return {};
+  }
 
-    return buildMetadata({
-      title: override?.title || `${service.title} Tallinn Estonia | ${localizedService?.title || "Veebiteenus Eestis"}`,
-      description: override?.description || service.summary,
-      path: override?.canonicalPath || `/services/${service.slug}`,
-      keywords: override?.keywords || [...new Set([...(service.keywords || []), ...(localizedService?.keywords || [])])],
-    });
+  return buildMetadata({
+    title: override?.title || `${service.title} Tallinn Estonia | ${localizedService?.title || "Veebiteenus Eestis"}`,
+    description: override?.description || service.summary,
+    path: override?.canonicalPath || `/services/${service.slug}`,
+    keywords: override?.keywords || [...new Set([...(service.keywords || []), ...(localizedService?.keywords || [])])],
+    locale: "en",
   });
 }
 

@@ -41,10 +41,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
-
-  useEffect(() => {
     setStoredLocale(locale);
   }, [locale]);
 

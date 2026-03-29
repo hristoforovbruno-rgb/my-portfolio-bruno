@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { ServicesPageContent } from "@/components/pages/services-page-content";
 import { buildMetadata, getSeoKeywords } from "@/lib/site-content";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Veebiarendus ja SEO Eestis | Teenused Tallinnas",
-  description:
-    "Veebiarendus, SEO optimeerimine, ümberdisain ja veebihooldus Tallinnas ja Eestis ettevõtetele, kes tahavad rohkem nähtavust ja päringuid.",
-  path: "/et/services",
-  keywords: getSeoKeywords("services"),
-  languages: {
-    en: "/services",
-    et: "/et/services",
-  },
-});
+// Server-rendered page metadata for the Estonian services route.
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Teenused",
+    description:
+      "Bruno Hristoforovi veebiarenduse teenused: koduleht, maandumisleht ja veebilahendused ettevõtetele Tallinnas, Eestis ja väljaspool Eestit.",
+    path: "/et/services",
+    keywords: getSeoKeywords("services"),
+    locale: "et",
+  });
+}
 
 export default function EstonianServicesPage() {
   const itemListSchema = {

@@ -2,7 +2,13 @@
 
 export type Locale = "en" | "et";
 
-export const siteUrl = "https://brunohristoforov.dev";
+export const siteUrl = "https://brunodev.ee";
+export const defaultOgImage = {
+  url: `${siteUrl}/favicon.svg`,
+  width: 512,
+  height: 512,
+  alt: "Bruno Hristoforov logo",
+} as const;
 
 const siteContent = {
   en: {
@@ -787,22 +793,51 @@ type MetadataOptions = {
   description: string;
   path?: string;
   keywords?: readonly string[];
-  languages?: Partial<Record<Locale, string>>;
+  locale?: Locale;
+  noIndex?: boolean;
 };
+
+function stripEtPrefix(pathname: string) {
+  if (pathname === "/et") {
+    return "/";
+  }
+
+  if (pathname.startsWith("/et/")) {
+    return pathname.slice(3);
+  }
+
+  return pathname;
+}
+
+function localizeMetadataPath(pathname: string, locale: Locale) {
+  const normalized = pathname === "" ? "/" : stripEtPrefix(pathname);
+
+  if (locale === "en") {
+    return normalized;
+  }
+
+  return normalized === "/" ? "/et" : `/et${normalized}`;
+}
 
 export function buildMetadata({
   title,
   description,
   path = "/",
   keywords = [],
-  languages,
+  locale = "en",
+  noIndex = false,
 }: MetadataOptions): Metadata {
-  const canonical = `${siteUrl}${path}`;
-  const languageAlternates = languages
-    ? Object.fromEntries(
-        Object.entries(languages).map(([locale, localePath]) => [locale, `${siteUrl}${localePath}`]),
-      )
-    : undefined;
+  const canonicalPath = localizeMetadataPath(path, locale);
+  const canonical = `${siteUrl}${canonicalPath}`;
+  const englishPath = localizeMetadataPath(path, "en");
+  const estonianPath = localizeMetadataPath(path, "et");
+  const languageAlternates = {
+    en: `${siteUrl}${englishPath}`,
+    et: `${siteUrl}${estonianPath}`,
+    "x-default": `${siteUrl}${englishPath}`,
+  };
+  const openGraphLocale = locale === "et" ? "et_EE" : "en_US";
+  const alternateLocale = locale === "et" ? ["en_US"] : ["et_EE"];
 
   return {
     title,
@@ -818,19 +853,25 @@ export function buildMetadata({
       "geo.position": "59.437;24.7536",
       ICBM: "59.437, 24.7536",
     },
+    robots: {
+      index: !noIndex,
+      follow: !noIndex,
+    },
     openGraph: {
       title,
       description,
       url: canonical,
       siteName: "Bruno Hristoforov",
-      locale: "et_EE",
-      alternateLocale: ["en_US"],
+      locale: openGraphLocale,
+      alternateLocale,
       type: "website",
+      images: [defaultOgImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [defaultOgImage.url],
     },
   };
 }

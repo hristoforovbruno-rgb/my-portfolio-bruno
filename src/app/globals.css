@@ -89,7 +89,7 @@
 @theme inline {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
-  --font-sans: "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-sans: var(--font-sans-generated), "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
 * {
@@ -118,7 +118,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
   color: var(--color-text);
   background: var(--page-bg);
   background-attachment: fixed;

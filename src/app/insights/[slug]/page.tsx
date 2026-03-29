@@ -8,22 +8,23 @@ export function generateStaticParams() {
   return insightPosts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  return params.then(async ({ slug }) => {
-    const post = insightPosts.find((entry) => entry.slug === slug);
-    const localizedPost = getExpandedContent("et").insightPosts.find((entry) => entry.slug === slug);
-    const override = await getSeoOverride(`/insights/${slug}`);
+// Server-rendered page metadata for each English insight article.
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = insightPosts.find((entry) => entry.slug === slug);
+  const localizedPost = getExpandedContent("et").insightPosts.find((entry) => entry.slug === slug);
+  const override = await getSeoOverride(`/insights/${slug}`);
 
-    if (!post) {
-      return {};
-    }
+  if (!post) {
+    return {};
+  }
 
-    return buildMetadata({
-      title: override?.title || `${post.title} | Insights | ${localizedPost?.title || "Nouanded Eestis"}`,
-      description: override?.description || post.description,
-      path: override?.canonicalPath || `/insights/${post.slug}`,
-      keywords: override?.keywords || [...new Set([...(post.keywords || []), ...(localizedPost?.keywords || [])])],
-    });
+  return buildMetadata({
+    title: override?.title || `${post.title} | Insights | ${localizedPost?.title || "Nouanded Eestis"}`,
+    description: override?.description || post.description,
+    path: override?.canonicalPath || `/insights/${post.slug}`,
+    keywords: override?.keywords || [...new Set([...(post.keywords || []), ...(localizedPost?.keywords || [])])],
+    locale: "en",
   });
 }
 

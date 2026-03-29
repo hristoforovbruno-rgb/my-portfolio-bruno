@@ -3,15 +3,18 @@ import { ContactPageContent } from "@/components/pages/contact-page-content";
 import { getSeoOverride } from "@/lib/admin-cms-server";
 import { buildMetadata, getSeoKeywords, getSiteContent, siteUrl } from "@/lib/site-content";
 
+// Server-rendered page metadata for the English contact route.
 export async function generateMetadata(): Promise<Metadata> {
   const override = await getSeoOverride("/contact");
+
   return buildMetadata({
-    title: override?.title || "Contact Web Developer Tallinn | Kontakt Veebiarendaja Tallinn",
+    title: override?.title || "Contact",
     description:
       override?.description ||
-      "Contact Bruno Hristoforov for a free website audit and a practical plan to improve trust, speed, local SEO, and customer conversion in Tallinn and across Estonia. Kontakt veebiarendaja Tallinn.",
+      "Get in touch with Bruno Hristoforov — freelance web developer in Tallinn, Estonia. Let's build your next website.",
     path: override?.canonicalPath || "/contact",
     keywords: override?.keywords || getSeoKeywords("contact"),
+    locale: "en",
   });
 }
 

@@ -7,6 +7,7 @@ export function generateStaticParams() {
   return serviceDetails.map((service) => ({ slug: service.slug }));
 }
 
+// Server-rendered page metadata for each Estonian service detail route.
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const service = getExpandedContent("et").serviceDetails.find((entry) => entry.slug === slug);
@@ -20,10 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: service.summary,
     path: `/et/services/${service.slug}`,
     keywords: service.keywords,
-    languages: {
-      en: `/services/${service.slug}`,
-      et: `/et/services/${service.slug}`,
-    },
+    locale: "et",
   });
 }
 

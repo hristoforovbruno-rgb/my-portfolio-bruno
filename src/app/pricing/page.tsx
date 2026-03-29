@@ -3,15 +3,18 @@ import { PricingPageContent } from "@/components/pages/pricing-page-content";
 import { getSeoOverride } from "@/lib/admin-cms-server";
 import { buildMetadata, getSeoKeywords } from "@/lib/site-content";
 
+// Server-rendered page metadata for the English pricing page.
 export async function generateMetadata(): Promise<Metadata> {
   const override = await getSeoOverride("/pricing");
+
   return buildMetadata({
-    title: override?.title || "Website Pricing Estonia | Veebilehe Hinnad Eestis",
+    title: override?.title || "Website Pricing Estonia",
     description:
       override?.description ||
-      "Website pricing for Tallinn and Estonia small businesses that need a faster, more persuasive online presence without losing more revenue to outdated pages. Veebilehe hinnad Eestis kohalikele ettevotetele.",
+      "Website pricing for Tallinn and Estonia small businesses that need a faster, more persuasive online presence without losing more revenue to outdated pages.",
     path: override?.canonicalPath || "/pricing",
     keywords: override?.keywords || getSeoKeywords("pricing"),
+    locale: "en",
   });
 }
 

@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import { PricingPageContent } from "@/components/pages/pricing-page-content";
 import { buildMetadata, getSeoKeywords } from "@/lib/site-content";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Veebilehe Hinnad Eestis | Hinnakiri ja Paketid",
-  description:
-    "Veebilehe hinnad Eestis ettevõtetele, kes vajavad kiiremat, veenvamat ja SEO-valmis veebiesindust. Vaata stardi-, täiustatud ja hoolduspakette.",
-  path: "/et/pricing",
-  keywords: getSeoKeywords("pricing"),
-  languages: {
-    en: "/pricing",
-    et: "/et/pricing",
-  },
-});
+// Server-rendered page metadata for the Estonian pricing page.
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Veebilehe hinnad Eestis",
+    description:
+      "Veebilehe hinnad Tallinna ja Eesti ettevõtetele, kes tahavad kiiremat, usaldusväärsemat ja tulemuslikumat veebilehte.",
+    path: "/et/pricing",
+    keywords: getSeoKeywords("pricing"),
+    locale: "et",
+  });
+}
 
 export default function EstonianPricingPage() {
   const faqSchema = {

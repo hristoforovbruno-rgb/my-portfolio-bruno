@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import { ContactPageContent } from "@/components/pages/contact-page-content";
-import { getSiteContent, siteUrl, buildMetadata, getSeoKeywords } from "@/lib/site-content";
+import { buildMetadata, getSeoKeywords, getSiteContent, siteUrl } from "@/lib/site-content";
 
-export const metadata: Metadata = buildMetadata({
-  title: "Kontakt | Veebiarendaja Tallinn | Bruno Hristoforov",
-  description:
-    "Võta ühendust Bruno Hristoforoviga ja küsi tasuta veebiauditit. Veebiarendaja Tallinn ettevõtetele, kes vajavad rohkem usaldust, SEO-d ja päringuid.",
-  path: "/et/contact",
-  keywords: getSeoKeywords("contact"),
-  languages: {
-    en: "/contact",
-    et: "/et/contact",
-  },
-});
+// Server-rendered page metadata for the Estonian contact route.
+export async function generateMetadata(): Promise<Metadata> {
+  return buildMetadata({
+    title: "Kontakt",
+    description:
+      "Võta ühendust Bruno Hristoforoviga — vabakutseline veebiarendaja Tallinnas. Loome sinu järgmise kodulehe Eestis või rahvusvaheliselt.",
+    path: "/et/contact",
+    keywords: getSeoKeywords("contact"),
+    locale: "et",
+  });
+}
 
 export default function EstonianContactPage() {
   const { contact } = getSiteContent("et");
