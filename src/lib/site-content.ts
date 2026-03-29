@@ -15,7 +15,6 @@ const siteContent = {
       { href: "/", label: "Home" },
       { href: "/services", label: "Services" },
       { href: "/insights", label: "Insights" },
-      { href: "/portfolio", label: "Examples" },
       { href: "/why-choose-me", label: "Why Me" },
       { href: "/process", label: "Process" },
       { href: "/pricing", label: "Pricing" },
@@ -300,7 +299,7 @@ const siteContent = {
         name: "Advanced Website",
         price: "from EUR 1,800",
         description: "For businesses that need stronger trust, more pages, and better lead flow.",
-        points: ["Up to 10 pages", "Custom interactive sections", "Advanced on-page SEO", "Examples or service expansion"],
+        points: ["Up to 10 pages", "Custom interactive sections", "Advanced on-page SEO", "Service expansion"],
       },
       {
         name: "Monthly Maintenance",
@@ -391,7 +390,6 @@ const siteContent = {
       { href: "/", label: "Avaleht" },
       { href: "/services", label: "Teenused" },
       { href: "/insights", label: "Nõuanded" },
-      { href: "/portfolio", label: "Näited" },
       { href: "/why-choose-me", label: "Miks mina" },
       { href: "/process", label: "Protsess" },
       { href: "/pricing", label: "Hinnad" },
@@ -676,7 +674,7 @@ const siteContent = {
         name: "Täiustatud veeb",
         price: "alates 1800 €",
         description: "Ettevõtetele, kes vajavad rohkem usaldust, rohkem lehti ja tugevamat kontaktivoogu.",
-        points: ["Kuni 10 lehte", "Kohandatud interaktiivsed sektsioonid", "Täiustatud on-page SEO", "Näidete või teenuste laiendus"],
+        points: ["Kuni 10 lehte", "Kohandatud interaktiivsed sektsioonid", "Täiustatud on-page SEO", "Teenuste laiendus"],
       },
       {
         name: "Igakuine hooldus",

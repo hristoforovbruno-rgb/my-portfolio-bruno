@@ -1,13 +1,12 @@
 import type { MetadataRoute } from "next";
 import { insightPosts, serviceDetails } from "@/lib/expanded-content";
-import { getSiteContent, siteUrl } from "@/lib/site-content";
+import { siteUrl } from "@/lib/site-content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/services",
     "/insights",
-    "/portfolio",
     "/why-choose-me",
     "/process",
     "/pricing",
@@ -95,33 +94,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
   ]);
-
-  const portfolioRoutes = getSiteContent("en").examplePages.flatMap((example) => [
-    {
-      url: `${siteUrl}/portfolio/${example.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      alternates: {
-        languages: {
-          en: `${siteUrl}/portfolio/${example.slug}`,
-          et: `${siteUrl}/et/portfolio/${example.slug}`,
-        },
-      },
-    },
-    {
-      url: `${siteUrl}/et/portfolio/${example.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      alternates: {
-        languages: {
-          en: `${siteUrl}/portfolio/${example.slug}`,
-          et: `${siteUrl}/et/portfolio/${example.slug}`,
-        },
-      },
-    },
-  ]);
-
-  return [...staticRoutes, ...serviceRoutes, ...insightRoutes, ...portfolioRoutes];
+  return [...staticRoutes, ...serviceRoutes, ...insightRoutes];
 }

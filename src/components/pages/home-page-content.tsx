@@ -36,8 +36,8 @@ export function HomePageContent() {
               {localizedContent?.homePrimaryCta || copy.heroPrimaryCta}
               <ArrowRightIcon className="h-4 w-4" />
             </Link>
-            <Link prefetch href={localizePath("/portfolio", locale)} className="theme-ghost interactive-button inline-flex min-h-12 items-center justify-center rounded-full px-6 py-4 text-sm font-semibold hover:border-[var(--color-gold-soft)] hover:text-[var(--color-gold)] sm:px-7">
-              {localizedContent?.homeSecondaryCta || copy.heroSecondaryCta}
+            <Link prefetch href={localizePath("/services", locale)} className="theme-ghost interactive-button inline-flex min-h-12 items-center justify-center rounded-full px-6 py-4 text-sm font-semibold hover:border-[var(--color-gold-soft)] hover:text-[var(--color-gold)] sm:px-7">
+              {copy.heroSecondaryCta}
             </Link>
           </div>
           <div className="grid max-w-2xl gap-5 pt-4 sm:grid-cols-3">

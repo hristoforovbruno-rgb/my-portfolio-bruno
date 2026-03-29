@@ -6,7 +6,7 @@
       heroDescription:
         "I build fast, modern websites that help small businesses and local service companies look trustworthy, rank better, and turn more visits into real revenue.",
       heroPrimaryCta: "Get a Free Website Audit Before You Lose Customers",
-      heroSecondaryCta: "See Website Examples",
+      heroSecondaryCta: "See Services",
       heroStats: [
         ["Faster trust", "Your business looks serious from the first second."],
         ["Better visibility", "More chances to be found before competitors are."],
@@ -257,7 +257,7 @@
       heroDescription:
         "Ehitan kiireid ja kaasaegseid veebilehti, mis aitavad väikeettevõtetel ja kohalikel teenusfirmadel mõjuda usaldusväärselt, olla paremini leitavad ja muuta rohkem külastusi reaalseks käibeks.",
       heroPrimaryCta: "Küsi tasuta veebiauditit enne, kui kaotad veel kliente",
-      heroSecondaryCta: "Vaata veebinäiteid",
+      heroSecondaryCta: "Vaata teenuseid",
       heroStats: [
         ["Kiirem usaldus", "Sinu ettevõte mõjub tõsiseltvõetavana esimesest sekundist."],
         ["Parem nähtavus", "Rohkem võimalusi olla leitav enne konkurente."],

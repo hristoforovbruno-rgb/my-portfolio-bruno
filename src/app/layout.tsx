@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   description:
     "Bruno Hristoforov builds fast, premium websites for small businesses in Tallinn and across Estonia that need more trust, more visibility, and more enquiries.",
-  applicationName: "Bruno Hristoforov Website Examples",
+  applicationName: "Bruno Hristoforov Website",
   category: "business",
   icons: {
     icon: "/favicon.svg",
