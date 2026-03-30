@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { AdminMessageAlerts } from "@/components/admin/admin-message-alerts";
 import { clearAdminSession, getAdminEmail } from "@/lib/admin-session";
 
 const navItems = [
@@ -80,6 +81,9 @@ export function AdminShell({
               <p className="theme-text-muted mt-2 max-w-2xl text-sm leading-7">{description}</p>
             </div>
           </header>
+          <div className="mb-8">
+            <AdminMessageAlerts />
+          </div>
           {children}
         </section>
       </div>

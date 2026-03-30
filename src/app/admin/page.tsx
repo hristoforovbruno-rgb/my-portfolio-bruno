@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
+import { AdminMessageAlerts } from "@/components/admin/admin-message-alerts";
 
 type AdminMessage = {
   id: string;
@@ -211,6 +212,10 @@ export default function AdminPage() {
             </div>
             <p className="mt-3 text-4xl font-semibold text-white">{unreadMessages}</p>
           </section>
+        </div>
+
+        <div className="mb-6">
+          <AdminMessageAlerts />
         </div>
 
         {error ? <p className="mb-6 rounded-2xl border border-red-400/20 bg-red-500/10 px-4 py-3 text-sm text-red-200">{error}</p> : null}

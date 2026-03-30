@@ -93,6 +93,15 @@ export function MailIcon(props: IconProps) {
   );
 }
 
+export function BellIcon(props: IconProps) {
+  return (
+    <BaseIcon {...props}>
+      <path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7" />
+      <path d="M10 20a2 2 0 0 0 4 0" />
+    </BaseIcon>
+  );
+}
+
 export function PhoneIcon(props: IconProps) {
   return (
     <BaseIcon {...props}>
