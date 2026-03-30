@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Cormorant_Garamond } from "next/font/google";
 import { AppShell } from "@/components/app-shell";
 import { LanguageProvider } from "@/lib/language";
 import { ThemeProvider } from "@/lib/theme";
@@ -8,23 +8,17 @@ import { defaultOgImage, siteUrl } from "@/lib/site-content";
 import { getRequestLocale } from "@/lib/server-locale";
 import "./globals.css";
 
-const sansFont = Manrope({
+const siteFont = Cormorant_Garamond({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-sans-generated",
-});
-
-const serifFont = Cormorant_Garamond({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-serif-generated",
+  variable: "--font-site-generated",
   weight: ["500", "600", "700"],
 });
 
-const fallbackSans = localFont({
+const fallbackFont = localFont({
   src: "../../node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf",
   display: "swap",
-  variable: "--font-sans-fallback",
+  variable: "--font-site-fallback",
 });
 
 export const dynamic = "force-dynamic";
@@ -151,7 +145,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${sansFont.variable} ${serifFont.variable} ${fallbackSans.variable} h-full scroll-smooth antialiased`}
+      className={`${siteFont.variable} ${fallbackFont.variable} h-full scroll-smooth antialiased`}
       suppressHydrationWarning
     >
       <head>
