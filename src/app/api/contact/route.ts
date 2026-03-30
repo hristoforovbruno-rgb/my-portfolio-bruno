@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { renderCustomerEmailTemplate } from "@/lib/customer-email-template";
 import { connectToDatabase } from "@/lib/mongodb";
+import { sendAdminContactPushNotification } from "@/lib/push-notifications";
 import { getSiteContent } from "@/lib/site-content";
 import Message from "@/models/Message";
 
@@ -234,6 +235,12 @@ export async function POST(request: Request) {
       phone,
       message,
     });
+
+    try {
+      await sendAdminContactPushNotification({ name, email, message });
+    } catch (pushError) {
+      console.warn("Admin push notification failed", pushError);
+    }
 
     const autoReplyCopy = getAutoReplyCopy(language);
     const displayName = name === "Unknown" ? autoReplyCopy.fallbackName : name;

@@ -64,6 +64,20 @@ export default function AdminPage() {
     };
 
     void loadMessages();
+    const intervalId = window.setInterval(() => {
+      void loadMessages();
+    }, 8000);
+
+    const handleRefresh = () => {
+      void loadMessages();
+    };
+
+    window.addEventListener("admin-messages-updated", handleRefresh);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener("admin-messages-updated", handleRefresh);
+    };
   }, []);
 
   const totalMessages = messages.length;

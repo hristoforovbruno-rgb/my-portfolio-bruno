@@ -25,9 +25,32 @@ export default function AdminMessagesPage() {
   }, [query, status]);
 
   useEffect(() => {
-    void apiRequest<MessagesResponse>(`/api/contact?${searchParams}`, { auth: true })
-      .then((result) => setMessages(result.items))
-      .catch((requestError) => setError(requestError instanceof Error ? requestError.message : "Failed to load messages"));
+    const loadMessages = async () => {
+      try {
+        const result = await apiRequest<MessagesResponse>(`/api/contact?${searchParams}`, { auth: true });
+        setMessages(result.items);
+        setError("");
+      } catch (requestError) {
+        setError(requestError instanceof Error ? requestError.message : "Failed to load messages");
+      }
+    };
+
+    void loadMessages();
+
+    const intervalId = window.setInterval(() => {
+      void loadMessages();
+    }, 8000);
+
+    const handleRefresh = () => {
+      void loadMessages();
+    };
+
+    window.addEventListener("admin-messages-updated", handleRefresh);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener("admin-messages-updated", handleRefresh);
+    };
   }, [searchParams]);
 
   async function updateMessage(id: string, isRead: boolean) {
