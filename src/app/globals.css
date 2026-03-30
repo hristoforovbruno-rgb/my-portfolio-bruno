@@ -89,7 +89,8 @@
 @theme inline {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
-  --font-sans: var(--font-sans-generated), "Trebuchet MS", "Segoe UI", sans-serif;
+  --font-sans: var(--font-sans-generated), var(--font-sans-fallback), "Aptos", "Segoe UI", sans-serif;
+  --font-serif: var(--font-serif-generated), "Iowan Old Style", "Palatino Linotype", serif;
 }
 
 * {
@@ -119,6 +120,8 @@ body {
   margin: 0;
   min-width: 320px;
   font-family: var(--font-sans);
+  font-weight: 450;
+  letter-spacing: 0.01em;
   color: var(--color-text);
   background: var(--page-bg);
   background-attachment: fixed;
@@ -134,6 +137,15 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+h1,
+h2,
+h3,
+.font-serif {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
 img,
