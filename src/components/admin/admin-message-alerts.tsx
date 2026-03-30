@@ -98,7 +98,7 @@ export function AdminMessageAlerts() {
 
     const masterGain = context.createGain();
     masterGain.gain.setValueAtTime(0.0001, context.currentTime);
-    masterGain.gain.exponentialRampToValueAtTime(0.22, context.currentTime + 0.03);
+    masterGain.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 0.03);
     masterGain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 1.1);
     masterGain.connect(context.destination);
 
@@ -116,7 +116,7 @@ export function AdminMessageAlerts() {
       oscillator.frequency.exponentialRampToValueAtTime(frequency * 0.996, endAt);
 
       gainNode.gain.setValueAtTime(0.0001, startAt);
-      gainNode.gain.exponentialRampToValueAtTime(0.16, startAt + 0.03);
+      gainNode.gain.exponentialRampToValueAtTime(0.28, startAt + 0.03);
       gainNode.gain.exponentialRampToValueAtTime(0.0001, endAt);
 
       oscillator.connect(gainNode);
