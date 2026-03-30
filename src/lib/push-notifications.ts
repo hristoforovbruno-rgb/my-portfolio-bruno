@@ -109,6 +109,11 @@ export async function sendAdminContactPushNotification({
 
   await Promise.all(
     subscriptions.map(async (subscription) => {
+      if (!subscription.keys?.p256dh || !subscription.keys?.auth) {
+        await AdminPushSubscription.deleteOne({ endpoint: subscription.endpoint });
+        return;
+      }
+
       try {
         await webpush.sendNotification(
           {
