@@ -35,7 +35,7 @@ export function CtaBanner() {
               {localizedContent?.ctaButton || content.ui.ctaButton}
               <ArrowRightIcon className="h-4 w-4" />
             </Link>
-            <p className="theme-text-soft text-sm">{content.ui.ctaReplyTime}</p>
+            <p className="theme-text-soft text-base leading-7">{content.ui.ctaReplyTime}</p>
           </div>
         </div>
       </div>

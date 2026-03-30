@@ -34,13 +34,13 @@ export function SiteFooter() {
           <h2 className="theme-text-main max-w-xl text-2xl font-semibold">
             {localizedContent?.footerTitle || content.ui.footerTitle}
           </h2>
-          <p className="theme-text-soft max-w-lg text-sm leading-7">
+          <p className="theme-text-soft max-w-lg text-base leading-8">
             {localizedContent?.footerText || content.ui.footerText}
           </p>
         </div>
         <div className="space-y-3">
           <p className="theme-text-faint text-sm font-semibold uppercase tracking-[0.3em]">{content.ui.footerPages}</p>
-          <div className="theme-text-muted flex flex-col gap-2 text-sm">
+          <div className="theme-text-muted flex flex-col gap-2 text-base">
             {content.navigation.map((item) => (
               <Link key={item.href} prefetch href={localizePath(item.href, locale)} className="transition-colors duration-300 hover:text-[var(--color-gold)]">
                 {item.label}
@@ -48,7 +48,7 @@ export function SiteFooter() {
             ))}
           </div>
         </div>
-        <div className="theme-text-muted space-y-3 text-sm">
+        <div className="theme-text-muted space-y-3 text-base">
           <p className="theme-text-faint font-semibold uppercase tracking-[0.3em]">{content.ui.footerContact}</p>
           <a href={`mailto:${publicEmail}`} className="flex items-start gap-3 break-all transition-colors duration-300 hover:text-[var(--color-gold)]">
             <MailIcon className="h-4 w-4 text-[var(--color-gold)]" />
