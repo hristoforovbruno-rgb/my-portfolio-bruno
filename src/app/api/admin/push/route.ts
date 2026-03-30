@@ -12,6 +12,17 @@ type PushSubscriptionPayload = {
   };
 };
 
+function isValidPushSubscription(payload: PushSubscriptionPayload | undefined): payload is {
+  endpoint: string;
+  expirationTime?: number | null;
+  keys: {
+    p256dh: string;
+    auth: string;
+  };
+} {
+  return Boolean(payload?.endpoint && payload.keys?.p256dh && payload.keys?.auth);
+}
+
 async function requireAdminSession() {
   const session = await getServerSession(authOptions);
 
@@ -49,7 +60,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Push notifications are not configured." }, { status: 503 });
     }
 
-    await saveAdminPushSubscription(body.subscription || {}, body.userAgent || "");
+    if (!isValidPushSubscription(body.subscription)) {
+      return NextResponse.json({ error: "Invalid push subscription." }, { status: 400 });
+    }
+
+    await saveAdminPushSubscription(body.subscription, body.userAgent || "");
 
     return NextResponse.json({ ok: true });
   } catch (error) {
