@@ -68,7 +68,7 @@ export function ContactForm() {
         }
       }}
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 md:gap-5">
         <label className="theme-text-muted grid gap-2 text-sm">
           {copy.nameLabel}
           <input
@@ -76,7 +76,7 @@ export function ContactForm() {
             value={form.name}
             autoComplete="name"
             onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
-            className="theme-field field-shell rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+            className="theme-field field-shell min-h-12 rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
             placeholder={copy.namePlaceholder}
           />
         </label>
@@ -86,7 +86,7 @@ export function ContactForm() {
             value={form.phone}
             autoComplete="tel"
             onChange={(event) => setForm((current) => ({ ...current, phone: event.target.value }))}
-            className="theme-field field-shell rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+            className="theme-field field-shell min-h-12 rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
             placeholder={copy.phonePlaceholder}
           />
         </label>
@@ -99,7 +99,7 @@ export function ContactForm() {
           value={form.email}
           autoComplete="email"
           onChange={(event) => setForm((current) => ({ ...current, email: event.target.value }))}
-          className="theme-field field-shell rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+          className="theme-field field-shell min-h-12 rounded-2xl px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
           placeholder={copy.emailPlaceholder}
         />
       </label>
@@ -110,14 +110,14 @@ export function ContactForm() {
           rows={6}
           value={form.message}
           onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))}
-          className="theme-field field-shell rounded-[1.5rem] px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
+          className="theme-field field-shell min-h-36 rounded-[1.5rem] px-4 py-3 outline-none transition duration-300 focus:border-[var(--color-gold)] focus:shadow-[0_0_0_4px_rgba(212,175,55,0.12)]"
           placeholder={copy.messagePlaceholder}
         />
       </label>
       <button
         type="submit"
         disabled={isSubmitting || formSettings?.enabled === false}
-        className="interactive-button inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-6 py-3 text-sm font-semibold text-black disabled:cursor-wait disabled:opacity-80"
+        className="interactive-button inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-6 py-3 text-sm font-semibold text-black disabled:cursor-wait disabled:opacity-80 sm:w-auto"
       >
         {formSettings?.enabled === false ? "Form disabled" : isSubmitting ? copy.submitting : copy.submit}
         <ArrowRightIcon className="h-4 w-4" />

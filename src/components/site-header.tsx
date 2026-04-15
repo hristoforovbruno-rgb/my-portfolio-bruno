@@ -105,7 +105,7 @@ export function SiteHeader() {
       </div>
 
       <div
-        className={`mobile-nav-backdrop fixed inset-x-0 bottom-0 top-[73px] z-40 transition-opacity duration-300 sm:top-[89px] lg:hidden ${
+        className={`mobile-nav-backdrop fixed inset-0 z-40 transition-all duration-300 lg:hidden ${
           isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         aria-hidden={!isOpen}
@@ -116,13 +116,13 @@ export function SiteHeader() {
         id={menuId}
         role="dialog"
         aria-modal="true"
-        className={`fixed inset-x-4 top-[84px] z-50 overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-2)] shadow-[0_24px_80px_rgba(0,0,0,0.28)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inset-x-6 sm:top-[100px] lg:hidden ${
+        className={`fixed inset-x-3 top-[78px] z-50 overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[color:var(--color-panel-2)]/92 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inset-x-6 sm:top-[100px] lg:hidden ${
           isOpen
-            ? "pointer-events-auto translate-y-0 opacity-100"
-            : "pointer-events-none -translate-y-3 opacity-0"
+            ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+            : "pointer-events-none -translate-y-3 scale-[0.98] opacity-0"
         }`}
       >
-        <nav className="mx-auto grid max-h-[min(32rem,calc(100vh-7rem))] gap-2 overflow-y-auto px-4 py-4 sm:px-6">
+        <nav className="mx-auto grid max-h-[min(36rem,calc(100dvh-6.5rem))] gap-2 overflow-y-auto overscroll-contain px-4 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:px-6">
           {content.navigation.map((item, index) => {
             const isActive = currentPath === item.href;
 

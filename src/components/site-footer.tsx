@@ -28,7 +28,7 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-[var(--color-border)] bg-[color:var(--color-panel)]/70 backdrop-blur-sm">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.7fr_1fr] lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[1.2fr_0.7fr_1fr] lg:gap-10 lg:px-8">
         <div className="space-y-4">
           <SiteLogo width={64} height={64} className="block h-14 w-auto object-contain sm:h-16" />
           <h2 className="theme-text-main max-w-xl text-2xl font-semibold">
@@ -40,7 +40,7 @@ export function SiteFooter() {
         </div>
         <div className="space-y-3">
           <p className="theme-text-faint text-sm font-semibold uppercase tracking-[0.3em]">{content.ui.footerPages}</p>
-          <div className="theme-text-muted flex flex-col gap-2 text-base">
+          <div className="theme-text-muted grid grid-cols-2 gap-x-4 gap-y-2 text-base sm:flex sm:flex-col">
             {content.navigation.map((item) => (
               <Link key={item.href} prefetch href={localizePath(item.href, locale)} className="transition-colors duration-300 hover:text-[var(--color-gold)]">
                 {item.label}

@@ -324,8 +324,11 @@ a {
 }
 
 .mobile-nav-backdrop {
-  background: var(--color-backdrop);
-  backdrop-filter: blur(10px);
+  background:
+    radial-gradient(circle at top, rgba(212, 175, 55, 0.12), transparent 28%),
+    color-mix(in srgb, var(--color-backdrop) 92%, transparent);
+  backdrop-filter: blur(22px) saturate(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(1.08);
 }
 
 article:hover .project-gradient {
@@ -483,5 +486,10 @@ article:hover .project-gradient {
 
   :target {
     scroll-margin-top: 5rem;
+  }
+
+  .mobile-nav-backdrop {
+    backdrop-filter: blur(18px) saturate(1.05);
+    -webkit-backdrop-filter: blur(18px) saturate(1.05);
   }
 }
