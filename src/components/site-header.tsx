@@ -116,7 +116,7 @@ export function SiteHeader() {
         id={menuId}
         role="dialog"
         aria-modal="true"
-        className={`fixed inset-x-3 top-[78px] z-50 overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-2)] shadow-[0_24px_80px_rgba(0,0,0,0.28)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inset-x-6 sm:top-[100px] lg:hidden ${
+        className={`fixed inset-x-3 top-[78px] z-50 overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[color:var(--color-panel-2)]/92 shadow-[0_24px_80px_rgba(0,0,0,0.28)] backdrop-blur-2xl transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inset-x-6 sm:top-[100px] lg:hidden ${
           isOpen
             ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
             : "pointer-events-none -translate-y-3 scale-[0.98] opacity-0"
