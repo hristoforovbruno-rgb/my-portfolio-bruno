@@ -18,9 +18,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {isAdminRoute ? (
         <div className="min-h-screen">{children}</div>
       ) : (
-        <div className="relative flex min-h-screen flex-col">
+        <div className="relative flex min-h-screen min-w-0 flex-col overflow-x-clip">
           <SiteHeader />
-          <main className="flex-1">
+          <main className="flex-1 min-w-0 overflow-x-clip">
             <PageTransition>{children}</PageTransition>
           </main>
           <SiteFooter />

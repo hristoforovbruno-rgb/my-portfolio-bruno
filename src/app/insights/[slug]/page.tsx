@@ -20,11 +20,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return buildMetadata({
-    title: override?.title || `${post.title} | Insights | ${localizedPost?.title || "Nouanded Eestis"}`,
+    title: override?.title || `${post.title} | Insights | ${localizedPost?.title || "Nõuanded Eestis"}`,
     description: override?.description || post.description,
     path: override?.canonicalPath || `/insights/${post.slug}`,
     keywords: override?.keywords || [...new Set([...(post.keywords || []), ...(localizedPost?.keywords || [])])],
     locale: "en",
+    type: "article",
   });
 }
 

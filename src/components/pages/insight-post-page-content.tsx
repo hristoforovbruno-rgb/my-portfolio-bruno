@@ -20,14 +20,14 @@ export function InsightPostPageContent({ slug }: { slug: InsightSlug }) {
 
   return (
     <SectionShell eyebrow={post.category} title={post.title} description={post.description}>
-      <div className="theme-surface rounded-[2rem] p-8">
+      <div className="theme-surface min-w-0 rounded-[2rem] p-6 sm:p-8">
         <p className="theme-text-faint text-sm">
           {post.publishedAt} · {post.readingTime}
         </p>
         <div className="mt-6 space-y-8">
           {post.sections.map((section) => (
             <section key={section.heading}>
-              <h2 className="theme-text-main text-2xl font-semibold">{section.heading}</h2>
+              <h2 className="text-balance theme-text-main text-2xl font-semibold">{section.heading}</h2>
               <div className="mt-4 space-y-4">
                 {section.body.map((paragraph) => (
                   <p key={paragraph} className="theme-text-muted text-base leading-8">

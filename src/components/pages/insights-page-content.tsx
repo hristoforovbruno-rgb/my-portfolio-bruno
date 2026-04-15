@@ -17,11 +17,14 @@ export function InsightsPageContent() {
 
   return (
     <SectionShell eyebrow={copy.eyebrow} title={copy.title} description={copy.description}>
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {posts.map((post) => (
-          <article key={post.slug} className="theme-surface interactive-card rounded-[2rem] p-7 hover:border-[var(--color-gold-soft)]">
+          <article
+            key={post.slug}
+            className="theme-surface interactive-card min-w-0 rounded-[2rem] p-6 hover:border-[var(--color-gold-soft)] sm:p-7"
+          >
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[var(--color-gold)]">{post.category}</p>
-            <h2 className="theme-text-main mt-4 text-2xl font-semibold leading-tight">{post.title}</h2>
+            <h2 className="text-balance theme-text-main mt-4 text-2xl font-semibold leading-tight">{post.title}</h2>
             <p className="theme-text-faint mt-3 text-sm">
               {post.publishedAt} · {post.readingTime}
             </p>

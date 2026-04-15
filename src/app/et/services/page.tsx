@@ -5,9 +5,9 @@ import { buildMetadata, getSeoKeywords } from "@/lib/site-content";
 // Server-rendered page metadata for the Estonian services route.
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
-    title: "Teenused",
+    title: "Veebiarenduse teenused Eestis",
     description:
-      "Bruno Hristoforovi veebiarenduse teenused: koduleht, maandumisleht ja veebilahendused ettevõtetele Tallinnas, Eestis ja väljaspool Eestit.",
+      "Bruno Hristoforovi veebiarenduse teenused: kodulehed, SEO optimeerimine, ümberdisain ja hooldus ettevõtetele Tallinnas ja üle Eesti.",
     path: "/et/services",
     keywords: getSeoKeywords("services"),
     locale: "et",

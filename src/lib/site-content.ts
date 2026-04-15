@@ -3,6 +3,10 @@
 export type Locale = "en" | "et";
 
 export const siteUrl = "https://brunodev.ee";
+export const siteName = "Bruno Hristoforov";
+export const businessName = "Bruno Hristoforov Web Development";
+export const defaultDescription =
+  "Bruno Hristoforov builds fast, modern websites for businesses in Estonia and worldwide from Tallinn.";
 export const defaultOgImage = {
   url: `${siteUrl}/favicon.svg`,
   width: 512,
@@ -795,6 +799,7 @@ type MetadataOptions = {
   keywords?: readonly string[];
   locale?: Locale;
   noIndex?: boolean;
+  type?: "website" | "article";
 };
 
 function stripEtPrefix(pathname: string) {
@@ -826,6 +831,7 @@ export function buildMetadata({
   keywords = [],
   locale = "en",
   noIndex = false,
+  type = "website",
 }: MetadataOptions): Metadata {
   const canonicalPath = localizeMetadataPath(path, locale);
   const canonical = `${siteUrl}${canonicalPath}`;
@@ -843,6 +849,17 @@ export function buildMetadata({
     title,
     description,
     keywords: [...keywords],
+    applicationName: businessName,
+    authors: [{ name: siteName, url: siteUrl }],
+    creator: siteName,
+    publisher: siteName,
+    category: "business",
+    referrer: "origin-when-cross-origin",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
     alternates: {
       canonical,
       ...(languageAlternates ? { languages: languageAlternates } : {}),
@@ -856,15 +873,22 @@ export function buildMetadata({
     robots: {
       index: !noIndex,
       follow: !noIndex,
+      googleBot: {
+        index: !noIndex,
+        follow: !noIndex,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
     openGraph: {
       title,
       description,
       url: canonical,
-      siteName: "Bruno Hristoforov",
+      siteName,
       locale: openGraphLocale,
       alternateLocale,
-      type: "website",
+      type,
       images: [defaultOgImage],
     },
     twitter: {
@@ -872,6 +896,61 @@ export function buildMetadata({
       title,
       description,
       images: [defaultOgImage.url],
+    },
+  };
+}
+
+type ContactSchemaLocale = {
+  location: string;
+  description: string;
+};
+
+export function buildContactSchema(locale: Locale) {
+  const contact = getSiteContent(locale).contact;
+  const localizedPath = locale === "et" ? "/et/contact" : "/contact";
+  const localeCopy: Record<Locale, ContactSchemaLocale> = {
+    en: {
+      location: "Tallinn, Estonia",
+      description: "Freelance web developer in Tallinn building fast business websites and SEO-ready pages.",
+    },
+    et: {
+      location: "Tallinn, Eesti",
+      description: "Tallinnas tegutsev veebiarendaja, kes loob kiireid äriveebe ja SEO-valmis lehti.",
+    },
+  };
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteUrl}#person`,
+    name: siteName,
+    description: localeCopy[locale].description,
+    jobTitle: locale === "et" ? "Vabakutseline veebiarendaja" : "Freelance Web Developer",
+    url: `${siteUrl}${localizedPath}`,
+    email: contact.email,
+    telephone: contact.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Tallinn",
+      addressCountry: "EE",
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Tallinn",
+      },
+      {
+        "@type": "Country",
+        name: "Estonia",
+      },
+    ],
+    knowsAbout:
+      locale === "et"
+        ? ["Veebiarendus", "Äriveebid", "Kohalik SEO", "Veebilehe ümberdisain"]
+        : ["Web development", "Business websites", "Local SEO", "Website redesign"],
+    homeLocation: {
+      "@type": "Place",
+      name: localeCopy[locale].location,
     },
   };
 }

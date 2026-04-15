@@ -71,7 +71,7 @@ export function PricingPageContent() {
           {pricingPlans.map((plan, index) => (
             <article
               key={plan.name}
-              className={`interactive-card rounded-[2rem] p-7 ${index === 1 ? "theme-highlight-surface" : "theme-surface"}`}
+              className={`interactive-card min-w-0 rounded-[2rem] p-6 sm:p-7 ${index === 1 ? "theme-highlight-surface" : "theme-surface"}`}
             >
               <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">{plan.name}</p>
               <p className="theme-text-main mt-4 text-4xl font-semibold">{plan.price}</p>
@@ -91,7 +91,7 @@ export function PricingPageContent() {
       <SectionShell eyebrow={pricingGuide.kicker} title={pricingGuide.title} description={pricingGuide.description}>
         <div className="grid gap-6 lg:grid-cols-2">
           {pricingGuide.factors.map((factor) => (
-            <article key={factor.title} className="theme-surface interactive-card rounded-[1.9rem] p-7">
+            <article key={factor.title} className="theme-surface interactive-card min-w-0 rounded-[1.9rem] p-6 sm:p-7">
               <h3 className="theme-text-main text-2xl font-semibold">{factor.title}</h3>
               <p className="theme-text-muted mt-4 text-base leading-8">{factor.body}</p>
             </article>
@@ -108,7 +108,7 @@ export function PricingPageContent() {
           {maintenancePlansSection.plans.map((plan, index) => (
             <article
               key={plan.name}
-              className={`interactive-card rounded-[2rem] p-7 ${index === 1 ? "theme-highlight-surface" : "theme-surface"}`}
+              className={`interactive-card min-w-0 rounded-[2rem] p-6 sm:p-7 ${index === 1 ? "theme-highlight-surface" : "theme-surface"}`}
             >
               <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">{plan.name}</p>
               <p className="theme-text-main mt-4 text-4xl font-semibold">{plan.price}</p>
@@ -138,7 +138,7 @@ export function PricingPageContent() {
           {pricingGuide.comparisonRows.map((row, index) => (
             <article
               key={row[0]}
-              className={`interactive-card rounded-[2rem] p-7 ${index === 1 ? "theme-highlight-surface" : "theme-surface"}`}
+              className={`interactive-card min-w-0 rounded-[2rem] p-6 sm:p-7 ${index === 1 ? "theme-highlight-surface" : "theme-surface"}`}
             >
               <div className="flex items-center justify-between gap-4">
                 <div>

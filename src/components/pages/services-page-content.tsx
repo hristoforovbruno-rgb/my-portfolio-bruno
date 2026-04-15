@@ -43,24 +43,36 @@ export function ServicesPageContent() {
             return (
               <article
                 key={service.title}
-                className="theme-surface surface-card interactive-card group rounded-[2rem] p-7 hover:border-[var(--color-gold-soft)]"
+                className="theme-surface surface-card interactive-card group min-w-0 rounded-[2rem] p-6 hover:border-[var(--color-gold-soft)] sm:p-7"
               >
                 <div className="mb-6 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">{service.keyword}</p>
-                    <h2 className="theme-text-main text-3xl font-semibold">{service.title}</h2>
+                  <div className="min-w-0">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">
+                      {service.keyword}
+                    </p>
+                    <h2 className="text-balance theme-text-main text-2xl font-semibold sm:text-3xl">
+                      {service.title}
+                    </h2>
                   </div>
                   <span className="gold-ring mt-1 flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-gold-soft)] bg-[var(--accent-surface)] text-[var(--color-gold)]">
                     <Icon className="h-5 w-5" />
                   </span>
                 </div>
                 <div className="space-y-4 text-base leading-8">
-                  <p className="theme-text-soft"><span className="theme-text-main font-semibold">{copy.problemLabel}</span> {service.pain}</p>
-                  <p className="theme-text-muted"><span className="font-semibold text-[var(--color-gold-light)]">{copy.solutionLabel}</span> {service.solution}</p>
+                  <p className="theme-text-soft">
+                    <span className="theme-text-main font-semibold">{copy.problemLabel}</span> {service.pain}
+                  </p>
+                  <p className="theme-text-muted">
+                    <span className="font-semibold text-[var(--color-gold-light)]">{copy.solutionLabel}</span>{" "}
+                    {service.solution}
+                  </p>
                 </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   {service.outcomes.map((outcome) => (
-                    <span key={outcome} className="rounded-full border border-[var(--color-gold-soft)] bg-[var(--accent-surface)] px-4 py-2 text-sm text-[var(--color-gold-light)]">
+                    <span
+                      key={outcome}
+                      className="rounded-full border border-[var(--color-gold-soft)] bg-[var(--accent-surface)] px-4 py-2 text-sm text-[var(--color-gold-light)]"
+                    >
                       {outcome}
                     </span>
                   ))}
@@ -78,7 +90,11 @@ export function ServicesPageContent() {
       </SectionShell>
       <FaqSection
         eyebrow={locale === "en" ? "FAQ" : "KKK"}
-        title={locale === "en" ? "Questions business owners ask before choosing a service" : "Küsimused, mida ettevõtjad enne teenuse valikut küsivad"}
+        title={
+          locale === "en"
+            ? "Questions business owners ask before choosing a service"
+            : "Küsimused, mida ettevõtjad enne teenuse valikut küsivad"
+        }
         description={
           locale === "en"
             ? "The best option depends on where your site is leaking value right now."

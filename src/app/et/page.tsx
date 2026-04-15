@@ -7,7 +7,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: "Vabakutseline veebiarendaja Tallinnas",
     description:
-      "Bruno Hristoforov — vabakutseline veebiarendaja Tallinnas. Loon kaasaegseid kodulehti ettevõtetele üle Eesti ja maailmas.",
+      "Bruno Hristoforov on vabakutseline veebiarendaja Tallinnas, kes loob kaasaegseid ja kiireid kodulehti ettevõtetele Eestis ja mujal.",
     path: "/et",
     keywords: getSeoKeywords("home"),
     locale: "et",

@@ -24,12 +24,12 @@ export function HomePageContent() {
 
   return (
     <>
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-28">
-        <div className="space-y-8">
+      <section className="mx-auto grid max-w-7xl items-start gap-10 px-4 py-12 sm:px-6 sm:py-18 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-24">
+        <div className="min-w-0 space-y-8">
           <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">{localizedContent?.homeHeroEyebrow || copy.heroEyebrow}</p>
           <div className="space-y-6">
-            <h1 className="theme-text-main max-w-4xl text-4xl font-semibold leading-[0.95] tracking-tight sm:text-5xl md:text-7xl">{localizedContent?.homeHeroTitle || copy.heroTitle}</h1>
-            <p className="theme-text-muted max-w-2xl text-lg leading-8 sm:text-xl md:text-2xl">{localizedContent?.homeHeroDescription || copy.heroDescription}</p>
+            <h1 className="text-balance theme-text-main max-w-4xl text-4xl font-semibold leading-[0.95] tracking-tight sm:text-5xl md:text-6xl xl:text-7xl">{localizedContent?.homeHeroTitle || copy.heroTitle}</h1>
+            <p className="theme-text-muted max-w-2xl text-base leading-8 sm:text-xl md:text-2xl">{localizedContent?.homeHeroDescription || copy.heroDescription}</p>
           </div>
           <div className="flex flex-col gap-4 sm:flex-row">
             <Link prefetch href={localizePath("/contact", locale)} className="interactive-button inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-gold)] px-6 py-4 text-sm font-semibold text-black sm:px-7">
@@ -40,9 +40,9 @@ export function HomePageContent() {
               {copy.heroSecondaryCta}
             </Link>
           </div>
-          <div className="grid max-w-2xl gap-5 pt-4 sm:grid-cols-3">
+          <div className="grid max-w-2xl gap-4 pt-2 sm:grid-cols-2 lg:grid-cols-3">
             {heroStats.map(([label, body, Icon]) => (
-              <div key={label} className="theme-surface-soft rounded-[1.6rem] p-5">
+              <div key={label} className="theme-surface-soft rounded-[1.6rem] p-5 sm:p-6">
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--color-gold-soft)] bg-[var(--accent-surface)] text-[var(--color-gold)]">
                   <Icon className="h-5 w-5" />
                 </div>
@@ -52,13 +52,13 @@ export function HomePageContent() {
             ))}
           </div>
         </div>
-        <div>
+        <div className="min-w-0">
           <div className="theme-hero-panel overflow-hidden rounded-[2rem]">
             <div className="border-b border-[var(--color-gold-soft)] bg-[linear-gradient(135deg,rgba(212,175,55,0.14),rgba(212,175,55,0.03))] px-5 py-6 sm:px-8 sm:py-7">
               <div className="flex items-start justify-between gap-4 sm:gap-6">
-                <div className="space-y-3">
+                <div className="min-w-0 space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[var(--color-gold)]">{copy.auditEyebrow}</p>
-                  <h2 className="theme-text-main text-2xl font-semibold sm:text-3xl">{copy.auditTitle}</h2>
+                  <h2 className="text-balance theme-text-main text-2xl font-semibold sm:text-3xl">{copy.auditTitle}</h2>
                   <p className="theme-text-muted max-w-md text-base leading-8 sm:text-lg">{copy.auditDescription}</p>
                 </div>
                 <div className="gold-ring flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--color-gold-soft)] bg-[var(--icon-panel-bg)] sm:h-16 sm:w-16">
@@ -92,12 +92,12 @@ export function HomePageContent() {
 
       <SectionShell eyebrow={copy.aboutSectionEyebrow} title={copy.aboutSectionTitle} description={copy.aboutSectionDescription}>
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="theme-surface-soft rounded-[2rem] p-7">
+          <div className="theme-surface-soft min-w-0 rounded-[2rem] p-6 sm:p-7">
             <p className="theme-text-muted text-lg leading-8">{copy.aboutSectionBody}</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {["React", "TypeScript", "Node.js", "Next.js", "SEO"].map((skill) => (
-              <div key={skill} className="theme-highlight-surface interactive-card theme-text-main rounded-[1.6rem] p-5 text-lg font-medium hover:border-[var(--color-gold)]">
+              <div key={skill} className="theme-highlight-surface interactive-card theme-text-main rounded-[1.6rem] p-5 text-lg font-medium hover:border-[var(--color-gold)] sm:p-6">
                 {skill}
               </div>
             ))}

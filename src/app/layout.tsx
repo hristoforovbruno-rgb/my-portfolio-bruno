@@ -1,18 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Cormorant_Garamond } from "next/font/google";
 import { AppShell } from "@/components/app-shell";
 import { LanguageProvider } from "@/lib/language";
 import { ThemeProvider } from "@/lib/theme";
-import { defaultOgImage, siteUrl } from "@/lib/site-content";
+import { businessName, buildContactSchema, defaultDescription, defaultOgImage, siteName, siteUrl } from "@/lib/site-content";
 import { getRequestLocale } from "@/lib/server-locale";
 import "./globals.css";
 
-const siteFont = Cormorant_Garamond({
-  subsets: ["latin"],
+const siteFont = localFont({
+  src: "../../node_modules/next/dist/compiled/@vercel/og/Geist-Regular.ttf",
   display: "swap",
   variable: "--font-site-generated",
-  weight: ["500", "600", "700"],
 });
 
 const fallbackFont = localFont({
@@ -46,9 +44,12 @@ const themeInitScript = `
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Bruno Hristoforov",
+  "@id": `${siteUrl}#person`,
+  name: siteName,
   jobTitle: "Freelance Web Developer",
   url: siteUrl,
+  email: "hristoforovbruno@gmail.com",
+  telephone: "+372 5863 0442",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Tallinn",
@@ -60,8 +61,10 @@ const personSchema = {
 const professionalServiceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Bruno Hristoforov Web Development",
+  "@id": `${siteUrl}#professional-service`,
+  name: businessName,
   url: siteUrl,
+  image: defaultOgImage.url,
   areaServed: ["EE", "Worldwide"],
   availableLanguage: ["English", "Estonian", "Russian"],
   priceRange: "\u00A3\u00A3",
@@ -72,16 +75,38 @@ const professionalServiceSchema = {
   },
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}#website`,
+  url: siteUrl,
+  name: siteName,
+  description: defaultDescription,
+  inLanguage: ["en", "et"],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6eddc" },
+    { media: "(prefers-color-scheme: dark)", color: "#060606" },
+  ],
+  colorScheme: "dark light",
+};
+
 // Server-rendered root metadata for global SEO, Open Graph, verification, and hreflang defaults.
 export async function generateMetadata(): Promise<Metadata> {
+  const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
   return {
     metadataBase: new URL(siteUrl),
     title: {
       default: "Bruno Hristoforov \u2014 Web Developer",
       template: "%s | Bruno Hristoforov \u2014 Web Developer",
     },
-    description:
-      "Bruno Hristoforov \u2014 freelance web developer based in Tallinn, Estonia. I build fast, modern websites for businesses worldwide.",
+    description: defaultDescription,
     keywords: [
       "veebiarendus",
       "koduleht",
@@ -101,19 +126,29 @@ export async function generateMetadata(): Promise<Metadata> {
         "x-default": siteUrl,
       },
     },
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    referrer: "origin-when-cross-origin",
     robots: {
       index: true,
       follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
     },
-    verification: {
-      google: "REPLACE_ME",
-    },
+    verification: googleVerification ? { google: googleVerification } : undefined,
     openGraph: {
       title: "Bruno Hristoforov \u2014 Web Developer",
-      description:
-        "Bruno Hristoforov \u2014 freelance web developer based in Tallinn, Estonia. I build fast, modern websites for businesses worldwide.",
+      description: defaultDescription,
       url: siteUrl,
-      siteName: "Bruno Hristoforov",
+      siteName,
       locale: "en_US",
       alternateLocale: ["et_EE"],
       type: "website",
@@ -122,8 +157,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: "Bruno Hristoforov \u2014 Web Developer",
-      description:
-        "Bruno Hristoforov \u2014 freelance web developer based in Tallinn, Estonia. I build fast, modern websites for businesses worldwide.",
+      description: defaultDescription,
       images: [defaultOgImage.url],
     },
     icons: {
@@ -141,6 +175,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getRequestLocale();
+  const contactSchema = buildContactSchema(locale);
 
   return (
     <html
@@ -161,8 +196,10 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }} />
       </head>
-      <body className="min-h-full text-[var(--color-text)]">
+      <body className="min-h-full overflow-x-clip text-[var(--color-text)]">
         <ThemeProvider>
           <LanguageProvider>
             <AppShell>{children}</AppShell>

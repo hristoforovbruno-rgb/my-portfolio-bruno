@@ -24,7 +24,7 @@ export function ServiceDetailPageContent({ slug }: { slug: ServiceSlug }) {
     <>
       <SectionShell eyebrow={service.eyebrow} title={service.title} description={service.summary}>
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <article className="theme-surface rounded-[2rem] p-8">
+          <article className="theme-surface min-w-0 rounded-[2rem] p-6 sm:p-8">
             <p className="theme-text-muted text-lg leading-8">{service.intro}</p>
             <div className="mt-6 rounded-[1.6rem] border border-[var(--color-gold-soft)] bg-[var(--accent-surface)] p-5">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-gold)]">
@@ -41,7 +41,7 @@ export function ServiceDetailPageContent({ slug }: { slug: ServiceSlug }) {
             </Link>
           </article>
 
-          <article className="theme-highlight-surface rounded-[2rem] p-8">
+          <article className="theme-highlight-surface min-w-0 rounded-[2rem] p-6 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-gold)]">
               {locale === "en" ? "Best for" : "Sobib kõige paremini"}
             </p>
@@ -66,7 +66,7 @@ export function ServiceDetailPageContent({ slug }: { slug: ServiceSlug }) {
         }
       >
         <div className="grid gap-6 lg:grid-cols-2">
-          <article className="theme-surface rounded-[2rem] p-7">
+          <article className="theme-surface min-w-0 rounded-[2rem] p-6 sm:p-7">
             <h3 className="theme-text-main text-2xl font-semibold">
               {locale === "en" ? "Deliverables" : "Töö sisu"}
             </h3>
@@ -78,7 +78,7 @@ export function ServiceDetailPageContent({ slug }: { slug: ServiceSlug }) {
               ))}
             </div>
           </article>
-          <article className="theme-surface rounded-[2rem] p-7">
+          <article className="theme-surface min-w-0 rounded-[2rem] p-6 sm:p-7">
             <h3 className="theme-text-main text-2xl font-semibold">
               {locale === "en" ? "Expected outcomes" : "Oodatavad tulemused"}
             </h3>
@@ -102,7 +102,7 @@ export function ServiceDetailPageContent({ slug }: { slug: ServiceSlug }) {
             : "Lihtne teostus, selged etapid ja ilma tarbetu segaduseta."
         }
       >
-        <div className="grid gap-4 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {service.process.map((step, index) => (
             <article key={step} className="theme-surface rounded-[1.8rem] p-6">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--color-gold)]">

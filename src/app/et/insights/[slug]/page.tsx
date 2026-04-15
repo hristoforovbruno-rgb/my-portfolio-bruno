@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     path: `/et/insights/${post.slug}`,
     keywords: post.keywords,
     locale: "et",
+    type: "article",
   });
 }
 

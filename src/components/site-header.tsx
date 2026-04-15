@@ -42,7 +42,7 @@ export function SiteHeader() {
   }, [isOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-panel)]">
+    <header className="sticky top-0 z-50 border-b border-[var(--color-border)] bg-[color:var(--color-panel)]/92 supports-[backdrop-filter]:bg-[color:var(--color-panel)]/78 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4 lg:gap-6 lg:px-8">
         <Link prefetch href={localizePath("/", locale)} className="flex shrink-0 items-center">
           <SiteLogo className="h-16 w-auto object-contain sm:h-20" priority />
@@ -57,6 +57,7 @@ export function SiteHeader() {
                 key={item.href}
                 prefetch
                 href={localizePath(item.href, locale)}
+                aria-current={isActive ? "page" : undefined}
                 className={`rounded-full px-4 py-2 transition-all duration-300 ${
                   isActive
                     ? "bg-[rgba(212,175,55,0.14)] text-[var(--color-gold-light)]"
@@ -113,13 +114,15 @@ export function SiteHeader() {
 
       <div
         id={menuId}
+        role="dialog"
+        aria-modal="true"
         className={`fixed inset-x-4 top-[84px] z-50 overflow-hidden rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-panel-2)] shadow-[0_24px_80px_rgba(0,0,0,0.28)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] sm:inset-x-6 sm:top-[100px] lg:hidden ${
           isOpen
             ? "pointer-events-auto translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-3 opacity-0"
         }`}
       >
-        <nav className="mx-auto grid max-h-[calc(100vh-7rem)] gap-2 overflow-y-auto px-4 py-4 sm:px-6">
+        <nav className="mx-auto grid max-h-[min(32rem,calc(100vh-7rem))] gap-2 overflow-y-auto px-4 py-4 sm:px-6">
           {content.navigation.map((item, index) => {
             const isActive = currentPath === item.href;
 
@@ -128,6 +131,7 @@ export function SiteHeader() {
                 key={item.href}
                 prefetch
                 href={localizePath(item.href, locale)}
+                aria-current={isActive ? "page" : undefined}
                 onClick={() => setIsOpen(false)}
                 className={`rounded-2xl px-4 py-3.5 text-base font-medium transition duration-300 ${
                   isActive

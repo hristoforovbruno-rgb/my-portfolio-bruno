@@ -16,14 +16,14 @@ export function WhyChooseMePageContent() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
           <div className="grid gap-4">
             {getSiteContent(locale).differentiators.map((item) => (
-              <div key={item} className="theme-surface interactive-card rounded-[1.7rem] p-6 hover:border-[var(--color-gold-soft)]">
+              <div key={item} className="theme-surface interactive-card min-w-0 rounded-[1.7rem] p-6 hover:border-[var(--color-gold-soft)]">
                 <p className="theme-text-muted text-lg leading-8">{item}</p>
               </div>
             ))}
           </div>
-          <div className="theme-highlight-surface rounded-[2rem] p-8">
+          <div className="theme-highlight-surface min-w-0 rounded-[2rem] p-6 sm:p-8">
             <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[var(--color-gold)]">{copy.resultsFocus}</p>
-            <h2 className="theme-text-main mt-4 text-3xl font-semibold">{copy.resultsTitle}</h2>
+            <h2 className="text-balance theme-text-main mt-4 text-2xl font-semibold sm:text-3xl">{copy.resultsTitle}</h2>
             <p className="theme-text-muted mt-5 text-lg leading-8">{copy.resultsBody}</p>
           </div>
         </div>

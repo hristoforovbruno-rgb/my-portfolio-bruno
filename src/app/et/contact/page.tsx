@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { ContactPageContent } from "@/components/pages/contact-page-content";
-import { buildMetadata, getSeoKeywords, getSiteContent, siteUrl } from "@/lib/site-content";
+import { buildContactSchema, buildMetadata, getSeoKeywords } from "@/lib/site-content";
 
 // Server-rendered page metadata for the Estonian contact route.
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
-    title: "Kontakt",
+    title: "Kontakt Bruno Hristoforoviga",
     description:
-      "Võta ühendust Bruno Hristoforoviga — vabakutseline veebiarendaja Tallinnas. Loome sinu järgmise kodulehe Eestis või rahvusvaheliselt.",
+      "Võta ühendust Bruno Hristoforoviga, vabakutselise veebiarendajaga Tallinnas, et luua kiire ja usaldusväärne äriveeb.",
     path: "/et/contact",
     keywords: getSeoKeywords("contact"),
     locale: "et",
@@ -15,27 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function EstonianContactPage() {
-  const { contact } = getSiteContent("et");
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Bruno Hristoforov",
-    description: "Veebiarendaja Tallinnas, kes ehitab kiireid äriveebe Eesti ettevõtetele.",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Tallinn",
-      addressCountry: "Estonia",
-    },
-    email: contact.email,
-    telephone: contact.phone,
-    jobTitle: "Veebiarendaja",
-    knowsAbout: ["Veebiarendus", "Äriveebid", "Kohalik SEO", "Veebilehe ümberdisain"],
-    areaServed: [
-      { "@type": "Country", name: "Estonia" },
-      { "@type": "City", name: "Tallinn" },
-    ],
-    url: `${siteUrl}/et/contact`,
-  };
+  const structuredData = buildContactSchema("et");
 
   return (
     <>
